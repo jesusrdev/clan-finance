@@ -1,40 +1,18 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@/components/ui/text';
 
 export default function IndexScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>🎮 Clan Finance</Text>
-      <Text style={styles.subtitle}>Quest & Savings</Text>
-      <Text style={styles.description}>
+    <View className="flex-1 justify-center items-center bg-background p-lg">
+      <Text variant="h1" className="text-primary mb-sm">
+        🎮 Clan Finance
+      </Text>
+      <Text variant="h2" className="text-foreground mb-md">
+        Quest & Savings
+      </Text>
+      <Text className="text-foreground text-center opacity-70">
         Aplicación de finanzas familiares gamificada
       </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FDF5E6',
-    padding: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#D91E1E',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#2C1810',
-    marginBottom: 16,
-  },
-  description: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-  },
-});

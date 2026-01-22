@@ -1,29 +1,15 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@/components/ui/text';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>🏠 Inicio</Text>
-      <Text style={styles.subtitle}>Bienvenido a tu Clan</Text>
+    <View className="flex-1 justify-center items-center bg-background">
+      <Text variant="h2" className="text-primary">
+        🏠 Inicio
+      </Text>
+      <Text className="text-foreground mt-sm opacity-70">
+        Bienvenido a tu Clan
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FDF5E6',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#D91E1E',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 8,
-  },
-});

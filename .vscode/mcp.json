@@ -1,0 +1,11 @@
+{
+	"servers": {
+		"uniwind": {
+			"url": "https://docs.uniwind.dev/mcp",
+			"type": "http",
+			"name": "Uniwind",
+			"version": "1.0.0"
+		}
+	},
+	"inputs": []
+}

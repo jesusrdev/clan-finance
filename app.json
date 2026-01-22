@@ -28,11 +28,11 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "react-native-edge-to-edge"
     ],
     "experiments": {
       "typedRoutes": true
     }
   }
 }
-

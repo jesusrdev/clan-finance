@@ -1,0 +1,197 @@
+@import "tailwindcss";
+@import "uniwind";
+
+@layer theme {
+  :root {
+    /* Scale Variables (Constant across skeletons) */
+    --spacing-xs: 4;
+    --spacing-sm: 8;
+    --spacing-md: 16;
+    --spacing-lg: 24;
+    --spacing-xl: 32;
+    --spacing-xxl: 48;
+
+    --font-size-xs: 12;
+    --font-size-sm: 14;
+    --font-size-base: 16;
+    --font-size-lg: 18;
+    --font-size-xl: 20;
+    --font-size-2xl: 24;
+    --font-size-3xl: 32;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --radius-sm: 4;
+    --radius-md: 8;
+    --radius-lg: 12;
+    --radius-xl: 16;
+    --radius-full: 9999;
+
+    /* Light Theme (Default fallback) */
+    @variant light {
+      --color-primary: #d91e1e;
+      --color-background: #fdf5e6;
+      --color-foreground: #2c1810;
+      --color-text-inverse: #ffffff;
+      --color-card: #ffffff;
+      --color-border: #2c1810;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #d91e1e;
+      --color-info: #2196f3;
+
+      --ui-border-width: 2;
+      --ui-radius: 4;
+    }
+
+    /* Dark Theme (Default fallback) */
+    @variant dark {
+      --color-primary: #2d5f5d;
+      --color-background: #121212;
+      --color-foreground: #ffffff;
+      --color-text-inverse: #121212;
+      --color-card: #1e1e1e;
+      --color-border: #2d5f5d;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #f44336;
+      --color-info: #2196f3;
+
+      --ui-border-width: 1;
+      --ui-radius: 0;
+    }
+
+    /* One Piece */
+    @variant onePiece {
+      --color-primary: #d91e1e;
+      --color-background: #fdf5e6;
+      --color-foreground: #2c1810;
+      --color-text-inverse: #ffffff;
+      --color-card: #ffffff;
+      --color-border: #2c1810;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #d91e1e;
+      --color-info: #2196f3;
+
+      --ui-border-width: 2;
+      --ui-radius: 4;
+    }
+
+    /* Demon Slayer */
+    @variant demonSlayer {
+      --color-primary: #2d5f5d;
+      --color-background: #121212;
+      --color-foreground: #ffffff;
+      --color-text-inverse: #121212;
+      --color-card: #1e1e1e;
+      --color-border: #2d5f5d;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #f44336;
+      --color-info: #2196f3;
+
+      --ui-border-width: 1;
+      --ui-radius: 0;
+    }
+
+    /* Naruto */
+    @variant naruto {
+      --color-primary: #ff9f1c;
+      --color-background: #ffffff;
+      --color-foreground: #2c2c2c;
+      --color-text-inverse: #ffffff;
+      --color-card: #fff8e7;
+      --color-border: #ff9f1c;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #f44336;
+      --color-info: #2196f3;
+
+      --ui-border-width: 1;
+      --ui-radius: 8;
+    }
+
+    /* Dragon Ball */
+    @variant dragonBall {
+      --color-primary: #f28f08;
+      --color-background: #253294;
+      --color-foreground: #ffffff;
+      --color-text-inverse: #253294;
+      --color-card: #3a4db8;
+      --color-border: #f28f08;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #f44336;
+      --color-info: #2196f3;
+
+      --ui-border-width: 2;
+      --ui-radius: 4;
+    }
+
+    /* Stranger Things */
+    @variant strangerThings {
+      --color-primary: #e20713;
+      --color-background: #0b0b0b;
+      --color-foreground: #ffffff;
+      --color-text-inverse: #0b0b0b;
+      --color-card: #1a1a1a;
+      --color-border: #e20713;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+      --color-error: #e20713;
+      --color-info: #2196f3;
+
+      --ui-border-width: 1;
+      --ui-radius: 2;
+    }
+  }
+}
+
+@theme {
+  /* Mapping Scale Variables to Tailwind Utilities */
+  --spacing-xs: var(--spacing-xs);
+  --spacing-sm: var(--spacing-sm);
+  --spacing-md: var(--spacing-md);
+  --spacing-lg: var(--spacing-lg);
+  --spacing-xl: var(--spacing-xl);
+  --spacing-xxl: var(--spacing-xxl);
+
+  --font-size-xs: var(--font-size-xs);
+  --font-size-sm: var(--font-size-sm);
+  --font-size-base: var(--font-size-base);
+  --font-size-lg: var(--font-size-lg);
+  --font-size-xl: var(--font-size-xl);
+  --font-size-2xl: var(--font-size-2xl);
+  --font-size-3xl: var(--font-size-3xl);
+
+  --font-weight-regular: var(--font-weight-regular);
+  --font-weight-medium: var(--font-weight-medium);
+  --font-weight-semibold: var(--font-weight-semibold);
+  --font-weight-bold: var(--font-weight-bold);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  /* Anime Specific UI Utilities */
+  --radius-ui: var(--ui-radius);
+  --border-width-ui: var(--ui-border-width);
+
+  /* Color Palette */
+  --color-primary: var(--color-primary);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-card: var(--color-card);
+  --color-border: var(--color-border);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --color-info: var(--color-info);
+}
