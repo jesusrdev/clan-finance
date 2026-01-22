@@ -1,0 +1,410 @@
+# Guía de Desarrollo - Clan Finance
+
+## 📋 Orden de Implementación Recomendado
+
+Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada item como completado a medida que avanzas.
+
+---
+
+## Fase 1: Autenticación (`src/features/auth/`)
+
+### Setup Inicial
+
+- [ ] Crear estructura de carpetas del feature
+- [ ] Configurar tipos TypeScript para auth
+
+### Implementación
+
+- [ ] Implementar login con Supabase Auth
+  - [ ] Crear `LoginScreen.tsx`
+  - [ ] Crear `LoginForm.tsx` component
+  - [ ] Validación de formulario
+  - [ ] Manejo de errores
+- [ ] Implementar registro de usuarios
+  - [ ] Crear `RegisterScreen.tsx`
+  - [ ] Crear `RegisterForm.tsx` component
+  - [ ] Validación de email y password
+  - [ ] Confirmación de password
+- [ ] Crear hook `useAuth`
+  - [ ] `login(email, password)`
+  - [ ] `register(email, password)`
+  - [ ] `logout()`
+  - [ ] `getCurrentUser()`
+- [ ] Implementar logout
+  - [ ] Botón de logout en perfil
+  - [ ] Limpiar caché al logout
+  - [ ] Redireccionar a login
+- [ ] Proteger rutas con autenticación
+  - [ ] Crear `ProtectedRoute` component
+  - [ ] Aplicar a rutas de tabs
+
+### Testing
+
+- [ ] Probar registro de nuevo usuario
+- [ ] Probar login con credenciales correctas
+- [ ] Probar login con credenciales incorrectas
+- [ ] Probar logout
+- [ ] Verificar redirección de rutas protegidas
+
+---
+
+## Fase 2: Perfil (`src/features/profile/`)
+
+### Setup Inicial
+
+- [ ] Crear estructura de carpetas del feature
+- [ ] Configurar tipos para Profile
+
+### Implementación
+
+- [ ] Crear/editar perfil de usuario
+  - [ ] Crear `ProfileScreen.tsx`
+  - [ ] Crear `EditProfileScreen.tsx`
+  - [ ] Formulario de edición (nombre, avatar)
+  - [ ] Upload de imagen (opcional)
+- [ ] Implementar selección de tema (5 skins)
+  - [ ] Crear `ThemeSelectorScreen.tsx`
+  - [ ] Grid de temas con preview
+  - [ ] Aplicar tema seleccionado
+  - [ ] Persistir en profile
+- [ ] Sistema de XP y niveles
+  - [ ] Mostrar XP actual
+  - [ ] Barra de progreso a siguiente nivel
+  - [ ] Cálculo de nivel basado en XP
+- [ ] Visualización de estadísticas
+  - [ ] Tareas completadas este mes
+  - [ ] Porcentaje de completado
+  - [ ] Balance actual
+  - [ ] Gráfica de progreso
+
+### Testing
+
+- [ ] Crear perfil nuevo
+- [ ] Editar nombre y avatar
+- [ ] Cambiar tema y verificar aplicación
+- [ ] Verificar cálculo de XP
+- [ ] Verificar estadísticas
+
+---
+
+## Fase 3: Clan (`src/features/clan/`)
+
+### Setup Inicial
+
+- [ ] Crear estructura de carpetas del feature
+- [ ] Configurar tipos para Clan
+
+### Onboarding
+
+- [ ] Crear nuevo clan (solo admin)
+  - [ ] Crear `CreateClanScreen.tsx`
+  - [ ] Formulario (nombre, moneda, allowance, %)
+  - [ ] Generar join_code automático
+  - [ ] Actualizar profile a role='admin'
+- [ ] Generar código de invitación
+  - [ ] Mostrar código en pantalla
+  - [ ] Botón para copiar código
+  - [ ] Regenerar código (opcional)
+- [ ] Unirse a clan con código
+  - [ ] Crear `JoinClanScreen.tsx`
+  - [ ] Input para código
+  - [ ] Buscar clan por código
+  - [ ] Crear join_request
+- [ ] Sistema de solicitudes (join_requests)
+  - [ ] Crear `JoinRequestsScreen.tsx` (admin)
+  - [ ] Listar solicitudes pendientes
+  - [ ] Botones aprobar/rechazar
+  - [ ] Actualizar profile al aprobar
+
+### Gestión
+
+- [ ] Gestión de miembros (admin)
+  - [ ] Crear `MembersScreen.tsx`
+  - [ ] Listar todos los miembros
+  - [ ] Ver perfil de miembro
+  - [ ] Remover miembro (opcional)
+- [ ] Compartir código vía Expo Sharing
+  - [ ] Botón "Compartir código"
+  - [ ] Integrar Expo Sharing
+  - [ ] Formato de mensaje
+
+### Testing
+
+- [ ] Crear clan como admin
+- [ ] Generar y copiar código
+- [ ] Unirse a clan con código (otro usuario)
+- [ ] Aprobar solicitud como admin
+- [ ] Verificar miembro agregado
+- [ ] Compartir código por WhatsApp
+
+---
+
+## Fase 4: Quests (`src/features/quests/`)
+
+### Setup Inicial
+
+- [ ] Crear estructura de carpetas del feature
+- [ ] Configurar tipos para Task y TaskLog
+
+### Gestión de Tareas (Admin)
+
+- [ ] Listar tareas del clan
+  - [ ] Crear `TasksListScreen.tsx`
+  - [ ] Filtrar por activas/inactivas
+  - [ ] Ordenar por frecuencia
+- [ ] Crear nueva quest
+  - [ ] Crear `CreateTaskScreen.tsx`
+  - [ ] Formulario (título, recompensa, frecuencia)
+  - [ ] Validaciones
+- [ ] Editar tarea
+  - [ ] Crear `EditTaskScreen.tsx`
+  - [ ] Cargar datos existentes
+  - [ ] Actualizar tarea
+- [ ] Activar/desactivar tarea
+  - [ ] Toggle en lista
+  - [ ] Actualizar is_active
+
+### Completar Tareas (Member)
+
+- [ ] Ver tareas del clan
+  - [ ] Crear `QuestsScreen.tsx`
+  - [ ] Listar tareas activas
+  - [ ] Mostrar recompensa
+- [ ] Marcar tarea como completada
+  - [ ] Botón "Completar"
+  - [ ] Crear task_log
+  - [ ] Mostrar confirmación
+- [ ] Ver tareas pendientes de aprobación
+  - [ ] Sección "Pendientes"
+  - [ ] Estado de cada tarea
+
+### Aprobación (Admin)
+
+- [ ] Ver tareas pendientes de aprobación
+  - [ ] Crear `ApproveTasksScreen.tsx`
+  - [ ] Listar task_logs pending
+  - [ ] Mostrar usuario y tarea
+- [ ] Aprobar tarea completada
+  - [ ] Botón "Aprobar"
+  - [ ] Actualizar status a approved
+  - [ ] Sumar XP al usuario
+- [ ] Rechazar tarea completada
+  - [ ] Botón "Rechazar"
+  - [ ] Actualizar status a rejected
+  - [ ] Opcional: agregar razón
+
+### Progreso
+
+- [ ] Ver progreso personal
+  - [ ] Mostrar % completado del mes
+  - [ ] Tareas completadas / total
+  - [ ] Proyección de payout
+- [ ] Ver progreso del clan (admin)
+  - [ ] Dashboard con todos los miembros
+  - [ ] % de cada miembro
+  - [ ] Gráfica de barras
+
+### Testing
+
+- [ ] Crear tarea como admin
+- [ ] Completar tarea como member
+- [ ] Aprobar tarea como admin
+- [ ] Verificar XP sumado
+- [ ] Verificar progreso actualizado
+- [ ] Calcular % del mes
+
+---
+
+## Fase 5: Wallet (`src/features/wallet/`)
+
+### Setup Inicial
+
+- [ ] Crear estructura de carpetas del feature
+- [ ] Configurar tipos para Wallet, Transaction, Payout
+
+### Visualización
+
+- [ ] Ver balance de wallet
+  - [ ] Crear `WalletScreen.tsx`
+  - [ ] Mostrar balance actual
+  - [ ] Mostrar moneda del clan
+- [ ] Ver historial de transacciones
+  - [ ] Lista de transactions
+  - [ ] Filtrar por tipo
+  - [ ] Ordenar por fecha
+
+### Transacciones
+
+- [ ] Registrar ingreso manual
+  - [ ] Crear `AddIncomeScreen.tsx`
+  - [ ] Input de monto
+  - [ ] Descripción opcional
+  - [ ] Crear transaction (manual_income)
+- [ ] Registrar gasto
+  - [ ] Crear `AddExpenseScreen.tsx`
+  - [ ] Input de monto (negativo)
+  - [ ] Categoría/descripción
+  - [ ] Crear transaction (expense)
+- [ ] Transferir a ahorro (futuro)
+  - [ ] Crear `TransferSavingsScreen.tsx`
+  - [ ] Input de monto
+  - [ ] Crear transaction (savings_transfer)
+
+### Payouts
+
+- [ ] Ver payouts calculados (admin)
+  - [ ] Crear `PayoutsScreen.tsx`
+  - [ ] Listar payouts del mes
+  - [ ] Filtrar por status
+- [ ] Marcar payout como pagado (admin)
+  - [ ] Botón "Marcar como pagado"
+  - [ ] Actualizar status
+  - [ ] Crear transaction
+- [ ] Ver historial de payouts (member)
+  - [ ] Lista de payouts recibidos
+  - [ ] Mostrar mes/año y monto
+
+### Dashboard (Admin)
+
+- [ ] Ver balance del clan
+  - [ ] Suma de todos los balances
+  - [ ] Balance promedio
+- [ ] Ver transacciones del clan
+  - [ ] Todas las transactions del mes
+  - [ ] Agrupar por tipo
+- [ ] Gráficos con Victory Native
+  - [ ] Gráfica de pie (distribución de gastos)
+  - [ ] Gráfica de línea (tendencia mensual)
+  - [ ] Gráfica de barras (balance por miembro)
+
+### Testing
+
+- [ ] Ver balance inicial (0)
+- [ ] Registrar ingreso manual
+- [ ] Verificar balance actualizado
+- [ ] Registrar gasto
+- [ ] Verificar balance reducido
+- [ ] Crear payout como admin
+- [ ] Marcar como pagado
+- [ ] Verificar transaction creada
+
+---
+
+## Fase 6: Notificaciones
+
+### Setup
+
+- [ ] Configurar Expo Notifications
+  - [ ] Solicitar permisos
+  - [ ] Configurar listeners
+
+### Notificaciones Locales
+
+- [ ] Recordatorio diario de tareas (8 PM)
+  - [ ] Programar notificación diaria
+  - [ ] Mensaje personalizado
+  - [ ] Deep link a quests
+- [ ] Notificación quincenal de progreso
+  - [ ] Calcular % completado
+  - [ ] Programar cada 15 días
+  - [ ] Mostrar proyección de payout
+- [ ] Alertas de solicitudes pendientes (admin)
+  - [ ] Notificar al crear join_request
+  - [ ] Deep link a solicitudes
+
+### Testing
+
+- [ ] Verificar permisos solicitados
+- [ ] Probar notificación diaria
+- [ ] Probar notificación quincenal
+- [ ] Probar deep links
+
+---
+
+## Fase 7: Pulido y Optimización
+
+### UI/UX
+
+- [ ] Animaciones con Reanimated
+  - [ ] Transiciones de pantallas
+  - [ ] Animaciones de botones
+  - [ ] Skeleton loaders
+- [ ] Estados de carga
+  - [ ] Spinners
+  - [ ] Skeleton screens
+  - [ ] Pull to refresh
+- [ ] Manejo de errores
+  - [ ] Toast messages
+  - [ ] Error boundaries
+  - [ ] Retry buttons
+
+### Performance
+
+- [ ] Optimizar imágenes
+  - [ ] Usar Expo Image
+  - [ ] Lazy loading
+- [ ] Optimizar listas
+  - [ ] FlatList con virtualization
+  - [ ] Memoization de items
+- [ ] Code splitting
+  - [ ] Lazy load de screens
+
+### Testing Final
+
+- [ ] Flujo completo de onboarding
+- [ ] Flujo completo de quests
+- [ ] Flujo completo de wallet
+- [ ] Probar con datos reales
+- [ ] Probar en dispositivo físico
+
+---
+
+## Checklist de Lanzamiento
+
+### Pre-lanzamiento
+
+- [ ] Configurar analytics (opcional)
+- [ ] Configurar error tracking (Sentry)
+- [ ] Configurar EAS Build
+- [ ] Crear iconos y splash screen
+- [ ] Configurar app.json para producción
+
+### Testing
+
+- [ ] TestFlight (iOS)
+- [ ] Internal Testing (Android)
+- [ ] Beta testers
+
+### Lanzamiento
+
+- [ ] App Store submission
+- [ ] Google Play submission
+- [ ] Landing page
+- [ ] Documentación de usuario
+
+---
+
+## Notas
+
+### Prioridades
+
+- ✅ **Crítico**: Fases 1-4 (funcionalidad core)
+- ⚠️ **Importante**: Fase 5 (wallet completo)
+- 📌 **Nice to have**: Fases 6-7 (pulido)
+
+### Estimación de Tiempo
+
+- Fase 1: 1-2 semanas
+- Fase 2: 1 semana
+- Fase 3: 2 semanas
+- Fase 4: 2-3 semanas
+- Fase 5: 2-3 semanas
+- Fase 6: 1 semana
+- Fase 7: 1-2 semanas
+
+**Total estimado**: 10-16 semanas
+
+---
+
+**Versión:** 1.0  
+**Última actualización:** Enero 2026

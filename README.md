@@ -1,168 +1,192 @@
-# Clan Finance: Quest & Savings - Especificación Técnica Maestra v2.0
+# Clan Finance: Quest & Savings
 
-## 1. Visión y Concepto
+## 🎯 Visión
 
-Aplicación de finanzas familiares gamificada. Las tareas del hogar son "Quests" y el ahorro se visualiza como "Poder" o "Nivel". Diseño basado en temas de cultura pop (Anime/Series) usando un sistema de diseño modular y "Skins".
+Aplicación móvil de finanzas familiares gamificada donde las tareas del hogar se convierten en "Quests" y el ahorro se visualiza como progreso de nivel. Diseñada con temas inspirados en cultura pop (Anime/Series) para hacer la gestión financiera familiar divertida y motivadora.
 
-## 2. Stack Tecnológico Detallado
+## 📚 Documentación
 
-| Capa           | Tecnología             | Implementación Específica                             |
-| -------------- | ---------------------- | ----------------------------------------------------- |
-| Framework      | Expo (React Native)    | SDK 50+, Expo Router (File-based navigation)          |
-| Estilos        | React Native Unistyles | Temas dinámicos con UnistylesRegistry                 |
-| Componentes    | Gluestack UI v2        | Adaptación de Shadcn para Native con estilos de juego |
-| Backend        | Supabase               | PostgreSQL + Auth + Realtime                          |
-| Query Layer    | TanStack Query v5      | Gestión de caché y persistencia offline               |
-| Gráficos       | Victory Native XL      | Visualización de progreso y distribución de gastos    |
-| Notificaciones | Expo Notifications     | Recordatorios locales (diarios/quincenales/mensuales) |
-| Compartir      | Expo Sharing           | Generación de enlaces/códigos de invitación al clan   |
+| Documento                                             | Descripción                                     |
+| ----------------------------------------------------- | ----------------------------------------------- |
+| **[Guía de Inicio](docs/INICIO.md)**                  | Instalación, configuración y primeros pasos     |
+| **[Casos de Uso](docs/CASOS-DE-USO.md)**              | 43 casos de uso atómicos con matriz de permisos |
+| **[Guía de Desarrollo](docs/DESARROLLO.md)**          | Roadmap de desarrollo con checkboxes por fase   |
+| **[Arquitectura](docs/architecture/ARQUITECTURA.md)** | Principios, capas y patrones arquitectónicos    |
+| **[Diagramas](docs/architecture/DIAGRAMAS.md)**       | UML, ER, flujo de datos y componentes           |
+| **[Flujos](docs/architecture/FLUJOS.md)**             | Diagramas de secuencia de casos de uso críticos |
+| **[Seguridad RLS](docs/database/SEGURIDAD-RLS.md)**   | Políticas de seguridad y permisos por tabla     |
+| **[Schema SQL](docs/database/supabase-schema.sql)**   | Script completo para crear la base de datos     |
+| **[Índice Completo](docs/README.md)**                 | Navegación completa de toda la documentación    |
 
-## 3. Arquitectura de Diseño (Skins)
+## 🚀 Inicio Rápido
 
-| Tema            | Color Primario | Color Fondo | Estilo UI                                      |
-| --------------- | -------------- | ----------- | ---------------------------------------------- |
-| One Piece       | `#D91E1E`      | `#FDF5E6`   | Bordes gruesos (2px), estilo carteles "Wanted" |
-| Demon Slayer    | `#2D5F5D`      | `#121212`   | Patrones Hamon, bordes rectos y elegantes      |
-| Naruto          | `#FF9F1C`      | `#FFFFFF`   | Estilo pergamino, sombras suaves               |
-| Dragon Ball     | `#F28F08`      | `#253294`   | Relieves, fuentes Bold y colores saturados     |
-| Stranger Things | `#E20713`      | `#0B0B0B`   | Brillo neón, estética años 80                  |
+```bash
+# 1. Instalar dependencias
+bash install-dependencies.sh
 
-## 4. Diccionario de Datos (Modelo de Base de Datos)
+# 2. Configurar variables de entorno
+cp .env.example .env
+# Editar .env con credenciales de Supabase
 
-### Módulo de Clan e Identidad
+# 3. Ejecutar script SQL en Supabase
+# Copiar docs/database/supabase-schema.sql al SQL Editor
 
-#### `clans`
+# 4. Iniciar proyecto
+npm start
+```
 
-| Campo                    | Tipo         | Descripción                                     |
-| ------------------------ | ------------ | ----------------------------------------------- |
-| `id`                     | uuid, PK     | Identificador único                             |
-| `name`                   | text         | Nombre del clan                                 |
-| `admin_id`               | uuid, FK     | Usuario que gestiona y paga                     |
-| `currency_code`          | text         | Ej. "PEN", "USD". Una sola para toda la familia |
-| `monthly_allowance`      | numeric      | Monto total mensual planeado (ej. 50.00)        |
-| `min_completion_percent` | int          | Porcentaje para bono completo (default 85)      |
-| `join_code`              | text, unique | Código de 6-8 caracteres para invitaciones      |
+Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 
-#### `profiles`
+## 🛠️ Stack Tecnológico
 
-| Campo            | Tipo     | Descripción                        |
-| ---------------- | -------- | ---------------------------------- |
-| `id`             | uuid, PK | Relación con auth.users            |
-| `clan_id`        | uuid, FK | Clan actual                        |
-| `display_name`   | text     | Nombre visible en la app           |
-| `avatar_url`     | text     | Imagen de perfil (o emoji elegido) |
-| `role`           | enum     | `admin` \| `member`                |
-| `selected_theme` | text     | Skin activa                        |
-| `xp`             | int      | Experiencia acumulada              |
+| Capa                 | Tecnología             | Propósito                              |
+| -------------------- | ---------------------- | -------------------------------------- |
+| **Framework**        | Expo (React Native)    | Desarrollo multiplataforma iOS/Android |
+| **Navegación**       | Expo Router            | Navegación file-based con TypeScript   |
+| **Estilos**          | React Native Unistyles | Temas dinámicos y responsive design    |
+| **UI Components**    | Gluestack UI v2        | Componentes accesibles y customizables |
+| **Backend**          | Supabase               | PostgreSQL + Auth + Realtime           |
+| **State Management** | TanStack Query v5      | Caché y sincronización de datos        |
+| **Gráficos**         | Victory Native XL      | Visualización de progreso y gastos     |
+| **Notificaciones**   | Expo Notifications     | Recordatorios locales programados      |
 
-#### `join_requests` (Nuevo: Sistema de Invitación)
+## 🎨 Temas (Skins)
 
-| Campo     | Tipo     | Descripción                           |
-| --------- | -------- | ------------------------------------- |
-| `id`      | uuid, PK | Identificador único                   |
-| `clan_id` | uuid, FK | Clan al que se desea unir             |
-| `user_id` | uuid, FK | Usuario que desea unirse              |
-| `status`  | enum     | `pending` \| `approved` \| `rejected` |
+5 temas inspirados en cultura pop:
 
-### Módulo de Quests (Tareas)
+| Tema                | Paleta         | Estilo            |
+| ------------------- | -------------- | ----------------- |
+| **One Piece**       | Rojo/Beige     | Carteles "Wanted" |
+| **Demon Slayer**    | Verde/Negro    | Patrones Hamon    |
+| **Naruto**          | Naranja/Blanco | Estilo pergamino  |
+| **Dragon Ball**     | Naranja/Azul   | Colores saturados |
+| **Stranger Things** | Rojo/Negro     | Neón años 80      |
 
-#### `tasks`
+## 📱 Funcionalidades Principales
 
-| Campo          | Tipo     | Descripción                                |
-| -------------- | -------- | ------------------------------------------ |
-| `id`           | uuid, PK | Identificador único                        |
-| `clan_id`      | uuid, FK | Clan propietario de la tarea               |
-| `title`        | text     | Título de la tarea                         |
-| `reward_value` | numeric  | Pago por cumplimiento individual           |
-| `frequency`    | enum     | `daily` \| `weekly` \| `monthly` \| `once` |
-| `is_active`    | boolean  | Si la tarea cuenta para el mes actual      |
+### Para Administradores (Padres)
 
-#### `task_logs`
+- ✅ Crear y gestionar clan familiar
+- ✅ Definir tareas con recompensas
+- ✅ Aprobar/rechazar tareas completadas
+- ✅ Gestionar pagos mensuales (allowances)
+- ✅ Dashboard con estadísticas del clan
+- ✅ Gráficas de progreso y gastos
 
-| Campo          | Tipo      | Descripción                           |
-| -------------- | --------- | ------------------------------------- |
-| `id`           | uuid, PK  | Identificador único                   |
-| `task_id`      | uuid, FK  | Tarea completada                      |
-| `user_id`      | uuid, FK  | Usuario que completó la tarea         |
-| `status`       | enum      | `pending` \| `approved` \| `rejected` |
-| `completed_at` | timestamp | Fecha y hora de completado            |
+### Para Miembros (Hijos)
 
-### Módulo de Economía y Wallet
+- ✅ Completar tareas diarias/semanales
+- ✅ Ganar XP y subir de nivel
+- ✅ Ver balance de wallet
+- ✅ Registrar gastos e ingresos
+- ✅ Cambiar tema de la app
+- ✅ Ver progreso mensual
 
-#### `wallets`
+## 🗂️ Estructura del Proyecto
 
-Saldo líquido disponible. Contiene `user_id` y `balance`.
+```
+clan-finance/
+├── docs/                          # 📚 Documentación completa
+│   ├── architecture/              # Arquitectura y diagramas
+│   ├── database/                  # SQL y seguridad RLS
+│   ├── CASOS-DE-USO.md           # 43 casos de uso
+│   ├── DESARROLLO.md             # Guía con checkboxes
+│   └── INICIO.md                 # Instalación y setup
+├── src/
+│   ├── app/                      # 🧭 Expo Router (navegación)
+│   │   ├── (auth)/              # Autenticación
+│   │   ├── (tabs)/              # Tabs principales
+│   │   └── _layout.tsx          # Layout raíz
+│   ├── features/                # 🎯 Módulos por funcionalidad
+│   │   ├── auth/                # Login, registro
+│   │   ├── clan/                # Gestión de clanes
+│   │   ├── quests/              # Sistema de tareas
+│   │   ├── wallet/              # Billetera y transacciones
+│   │   └── profile/             # Perfil y configuración
+│   ├── components/              # 🧩 Componentes reutilizables
+│   │   ├── ui/                  # Componentes UI base
+│   │   └── layout/              # Layouts compartidos
+│   ├── lib/                     # 🔧 Servicios
+│   │   ├── supabase/            # Cliente Supabase
+│   │   └── query/               # Cliente TanStack Query
+│   ├── types/                   # 📝 Tipos TypeScript
+│   │   ├── database.types.ts    # Tipos de Supabase (generados)
+│   │   ├── models.ts            # Tipos de negocio
+│   │   └── dto.ts               # Data Transfer Objects
+│   ├── hooks/                   # 🪝 Custom React hooks
+│   ├── theme/                   # 🎨 Sistema de temas
+│   │   ├── themes.ts            # 5 skins definidos
+│   │   └── unistyles.ts         # Configuración Unistyles
+│   └── constants/               # 🔢 Constantes y config
+├── assets/                      # 🖼️ Imágenes y recursos
+├── install-dependencies.sh      # Script de instalación
+├── .env.example                # Template de variables
+├── package.json
+├── tsconfig.json               # TypeScript con path aliases
+└── app.json                    # Configuración Expo
+```
 
-#### `transactions`
+## 🔒 Seguridad
 
-Historial contable detallado.
+- **Row Level Security (RLS)**: Políticas a nivel de base de datos
+- **Autenticación**: Supabase Auth con JWT
+- **Aislamiento por Clan**: Cada admin solo ve su clan
+- **Validaciones**: En BD, backend y frontend
 
-| Campo       | Tipo     | Descripción                     |
-| ----------- | -------- | ------------------------------- |
-| `id`        | uuid, PK | Identificador único             |
-| `wallet_id` | uuid, FK | Billetera relacionada           |
-| `amount`    | numeric  | Positivo o negativo             |
-| `type`      | enum     | Tipo de transacción (ver abajo) |
+Ver [Documentación de Seguridad](docs/database/SEGURIDAD-RLS.md) para detalles.
 
-**Tipos de Transacción:**
+## 🧪 Testing (Futuro)
 
-- `allowance_payout`: Pago mensual por tareas
-- `manual_income`: Dinero externo agregado por el usuario para ahorrar
-- `expense`: Gastos reales registrados
-- `savings_transfer`: Dinero movido de wallet a meta de ahorro
+```bash
+# Unit tests
+npm test
 
-#### `payouts` (Nuevo: Registro de Pagos del Admin)
+# E2E tests
+npm run test:e2e
+```
 
-| Campo     | Tipo     | Descripción                      |
-| --------- | -------- | -------------------------------- |
-| `id`      | uuid, PK | Identificador único              |
-| `user_id` | uuid, FK | Usuario que recibe el pago       |
-| `amount`  | numeric  | Monto final pagado               |
-| `month`   | int      | Mes evaluado                     |
-| `year`    | int      | Año evaluado                     |
-| `status`  | enum     | `calculated` \| `paid_in_person` |
+## 📦 Scripts Disponibles
 
-## 5. Lógica de Negocio y Flujos
+```bash
+npm start              # Iniciar Expo Dev Server
+npm run android        # Abrir en Android
+npm run ios            # Abrir en iOS
+npm run web            # Abrir en navegador
+npx expo start -c      # Limpiar caché
+```
 
-### A. Unión a un Clan
+## 🤝 Contribuir
 
-1. El Admin genera un enlace o código desde la app (`clans.join_code`)
-2. El Miembro ingresa el código y se crea una `join_request` con estado `pending`
-3. El Admin recibe una notificación y aprueba al miembro, asignándole el `clan_id`
+1. Fork el proyecto
+2. Crear feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit cambios (`git commit -m 'Add AmazingFeature'`)
+4. Push al branch (`git push origin feature/AmazingFeature`)
+5. Abrir Pull Request
 
-### B. El Cierre Mensual (Cálculo del 85%)
+## 📄 Licencia
 
-Al final del mes, el sistema evalúa los `task_logs` aprobados contra el total de tareas `is_active`:
+Este proyecto es privado y propietario.
 
-- **Éxito (≥ `min_completion_percent`)**: Se genera un `payout` por el valor de `monthly_allowance`
-- **Fallo (< `min_completion_percent`)**: Se suma el `reward_value` de cada tarea aprobada
+## 🆘 Soporte
 
-**Flujo de Pago:**
+- **Documentación**: Ver carpeta `docs/`
+- **Issues**: GitHub Issues
+- **Supabase**: [docs.supabase.com](https://docs.supabase.com)
+- **Expo**: [docs.expo.dev](https://docs.expo.dev)
 
-1. El estado del pago queda como `calculated`
-2. Cuando el Admin entrega el dinero físico, marca `paid_in_person`
-3. El saldo se suma a la `wallet` del niño
+---
 
-### C. Ahorro y Dinero Externo (Manual Incomes)
+**Versión:** 1.0  
+**Estado:** En desarrollo 🚧  
+**Última actualización:** Enero 2026
 
-Si un niño recibe dinero extra (ej. regalo de un tío):
+---
 
-1. Lo registra como `manual_income`
-2. Esto aumenta su `wallet.balance` directamente sin pasar por aprobación del admin
-3. El niño puede elegir "Mover a Meta de Ahorro", lo cual resta de `wallet` y suma a `savings_goal.current_amount`
+## 🎯 Próximos Pasos
 
-## 6. Notificaciones Locales y Alertas
+1. **Configurar el proyecto**: Ver [Guía de Inicio](docs/INICIO.md)
+2. **Entender la arquitectura**: Leer [Arquitectura](docs/architecture/ARQUITECTURA.md)
+3. **Comenzar desarrollo**: Seguir [Guía de Desarrollo](docs/DESARROLLO.md)
+4. **Revisar casos de uso**: Ver [Casos de Uso](docs/CASOS-DE-USO.md)
 
-- **Check de Tareas (Diario)**: "¡No dejes que tu racha muera! Marca tus tareas antes de las 8 PM"
-- **Estado de Bono (Quincenal)**: "Llevas un 60% de tareas hechas. ¡Necesitas el 85% para el bono de [Moneda] [Monto]!"
-- **Solicitudes Pendientes**: Alerta al Admin si hay nuevos miembros esperando unirse
-
-## 7. Instrucciones para la IA (Desarrollo Optimizado)
-
-- **Contexto de Wallet**: "El saldo de la billetera es un valor derivado pero persistente. Cada transacción debe actualizar el balance mediante un Trigger de Base de Datos para evitar discrepancias."
-
-- **Sistema de Temas**: "Usa el `UnistylesRegistry` para inyectar el tema basado en `profiles.selected_theme`. Los componentes de Gluestack deben consumir los tokens de color del tema activo."
-
-- **Invitaciones**: "Usa `expo-sharing` para permitir que el admin comparta el `join_code` por WhatsApp o Telegram de forma nativa."
-
-- **Validación Semestral**: "Crea una vista de 'Auditoría de Héroe' que compare ingresos vs ahorros de los últimos 6 meses para sugerir bonos de julio/diciembre."
+¡Bienvenido a Clan Finance! 🎮💰

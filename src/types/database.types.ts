@@ -130,6 +130,8 @@ export interface Database {
           amount: number;
           month: number;
           year: number;
+          payout_type: "monthly_allowance" | "bonus" | "special";
+          description: string | null;
           status: "calculated" | "paid_in_person";
           created_at: string;
           updated_at: string;
