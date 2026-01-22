@@ -417,3 +417,129 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 - [ ] Probar dashboard en web (`npm run web`)
 - [ ] Optimizar visualización de datos
 
+
+---
+
+## ⚠️ Validaciones Críticas en la App
+
+### Estas validaciones DEBEN implementarse en el código (no están en SQL)
+
+#### 1. Onboarding Forzado (Usuario sin Clan)
+**Dónde:** `app/_layout.tsx` o middleware de autenticación
+
+```typescript
+// Verificar si usuario tiene clan
+const { data: profile } = await supabase
+  .from('profiles')
+  .select('clan_id')
+  .eq('id', user.id)
+  .single();
+
+if (!profile.clan_id) {
+  // Redirigir a pantalla de onboarding
+  router.replace('/onboarding');
+  return;
+}
+```
+
+**Razón:** Usuario NO puede usar la app sin clan
+
+---
+
+#### 2. Tarea Completada Solo 1 Vez por Frecuencia
+**Dónde:** `features/quests/hooks/useCompleteTask.ts`
+
+```typescript
+// Antes de crear task_log, verificar si ya completó
+const today = new Date();
+const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+
+const { data: existingLog } = await supabase
+  .from('task_logs')
+  .select('*')
+  .eq('task_id', taskId)
+  .eq('user_id', userId)
+  .gte('completed_at', startOfDay.toISOString())
+  .lte('completed_at', endOfDay.toISOString())
+  .single();
+
+if (existingLog) {
+  throw new Error('Ya completaste esta tarea hoy');
+}
+```
+
+**Razón:** Evitar completar la misma tarea múltiples veces al día
+
+**Nota:** Para weekly/monthly, ajustar el rango de fechas
+
+---
+
+#### 3. Admin No Puede Salir del Clan
+**Dónde:** `features/clan/hooks/useLeaveClan.ts`
+
+```typescript
+// Verificar si usuario es admin del clan
+const { data: clan } = await supabase
+  .from('clans')
+  .select('admin_id')
+  .eq('id', clanId)
+  .single();
+
+if (clan.admin_id === userId) {
+  throw new Error('El admin no puede salir del clan. Transfiere el rol primero.');
+}
+
+// Si no es admin, permitir salir
+await supabase
+  .from('profiles')
+  .update({ clan_id: null })
+  .eq('id', userId);
+```
+
+**Razón:** Proteger integridad del clan
+
+---
+
+#### 4. Validar Balance Antes de Gastos
+**Dónde:** `features/wallet/hooks/useAddExpense.ts`
+
+```typescript
+// Obtener balance actual
+const { data: wallet } = await supabase
+  .from('wallets')
+  .select('balance')
+  .eq('user_id', userId)
+  .single();
+
+// Validar que hay fondos suficientes
+if (wallet.balance + amount < 0) {  // amount es negativo para gastos
+  throw new Error('Saldos insuficientes');
+}
+
+// Si hay fondos, crear transacción
+await supabase
+  .from('transactions')
+  .insert({
+    wallet_id: walletId,
+    amount: amount,  // negativo
+    type: 'expense',
+    description: description
+  });
+```
+
+**Razón:** Evitar race conditions con balance negativo
+
+**Nota:** El constraint SQL rechazará la transacción si falla, pero mejor validar antes
+
+---
+
+### Resumen de Validaciones
+
+| Validación | Ubicación | Prioridad |
+|------------|-----------|-----------|
+| Onboarding forzado | `app/_layout.tsx` | 🔴 Crítica |
+| Tarea 1 vez por día | `useCompleteTask` | 🔴 Crítica |
+| Admin no sale | `useLeaveClan` | 🟡 Alta |
+| Balance positivo | `useAddExpense` | 🟡 Alta |
+

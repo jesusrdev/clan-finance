@@ -10,7 +10,7 @@ export interface Database {
         Row: {
           id: string;
           name: string;
-          admin_id: string;
+          admin_id: string | null;
           currency_code: string;
           monthly_allowance: number;
           min_completion_percent: number;
@@ -115,6 +115,7 @@ export interface Database {
             | "manual_income"
             | "expense"
             | "savings_transfer";
+          description: string | null;
           created_at: string;
         };
         Insert: Omit<

@@ -24,7 +24,7 @@ CREATE TYPE payout_type AS ENUM ('monthly_allowance', 'bonus', 'special');
 CREATE TABLE clans (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT NOT NULL,
-  admin_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  admin_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   currency_code TEXT NOT NULL DEFAULT 'USD',
   monthly_allowance NUMERIC(10, 2) NOT NULL DEFAULT 0,
   min_completion_percent INTEGER NOT NULL DEFAULT 85 CHECK (min_completion_percent >= 0 AND min_completion_percent <= 100),
@@ -32,6 +32,7 @@ CREATE TABLE clans (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 
 -- Índices para clans
 CREATE INDEX idx_clans_admin_id ON clans(admin_id);
@@ -139,8 +140,10 @@ CREATE TABLE transactions (
   wallet_id UUID NOT NULL REFERENCES wallets(id) ON DELETE CASCADE,
   amount NUMERIC(10, 2) NOT NULL,
   type transaction_type NOT NULL,
+  description TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 
 -- Índices para transactions
 CREATE INDEX idx_transactions_wallet_id ON transactions(wallet_id);
@@ -168,6 +171,11 @@ CREATE TABLE payouts (
 CREATE INDEX idx_payouts_user_id ON payouts(user_id);
 CREATE INDEX idx_payouts_status ON payouts(status);
 CREATE INDEX idx_payouts_month_year ON payouts(month, year);
+
+-- Índice único para evitar duplicar monthly_allowance
+-- Permite múltiples bonos, pero solo 1 allowance mensual por usuario
+CREATE UNIQUE INDEX idx_payouts_monthly_unique ON payouts(user_id, month, year) 
+  WHERE payout_type = 'monthly_allowance';
 
 -- =====================================================
 -- TRIGGERS: updated_at automático
@@ -231,6 +239,64 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER create_wallet_on_profile AFTER INSERT ON profiles
   FOR EACH ROW EXECUTE FUNCTION create_wallet_for_user();
+
+-- =====================================================
+-- TRIGGER: Prevenir eliminación de clan con miembros
+-- =====================================================
+
+CREATE OR REPLACE FUNCTION prevent_clan_deletion_with_members()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM profiles 
+    WHERE clan_id = OLD.id 
+    AND id != OLD.admin_id
+  ) THEN
+    RAISE EXCEPTION 'No se puede eliminar un clan con miembros activos';
+  END IF;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_clan_deletion BEFORE DELETE ON clans
+  FOR EACH ROW EXECUTE FUNCTION prevent_clan_deletion_with_members();
+
+-- =====================================================
+-- TRIGGER: Auto-promover nuevo admin si el actual se elimina
+-- =====================================================
+
+CREATE OR REPLACE FUNCTION auto_promote_new_admin()
+RETURNS TRIGGER AS $$
+DECLARE
+  new_admin_id UUID;
+BEGIN
+  -- Si admin_id es NULL, promover al miembro más antiguo
+  IF NEW.admin_id IS NULL THEN
+    SELECT id INTO new_admin_id
+    FROM profiles
+    WHERE clan_id = NEW.id
+    ORDER BY created_at ASC
+    LIMIT 1;
+    
+    IF new_admin_id IS NOT NULL THEN
+      -- Actualizar clan con nuevo admin
+      NEW.admin_id := new_admin_id;
+      
+      -- Actualizar role del nuevo admin
+      UPDATE profiles 
+      SET role = 'admin' 
+      WHERE id = new_admin_id;
+    END IF;
+  END IF;
+  
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER promote_admin_on_null BEFORE UPDATE ON clans
+  FOR EACH ROW 
+  WHEN (NEW.admin_id IS NULL AND OLD.admin_id IS NOT NULL)
+  EXECUTE FUNCTION auto_promote_new_admin();
 
 -- =====================================================
 -- FUNCIONES AUXILIARES
