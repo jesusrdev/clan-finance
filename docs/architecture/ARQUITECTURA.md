@@ -23,7 +23,7 @@ Clan Finance es una aplicación móvil multiplataforma (iOS/Android) construida 
 
 - TanStack Query como única fuente de verdad para datos del servidor
 - Supabase como única fuente de verdad para persistencia
-- UnistylesRuntime para estado del tema
+- Uniwind para estado y aplicación del tema
 
 ## Capas de la Arquitectura
 
@@ -36,14 +36,14 @@ Clan Finance es una aplicación móvil multiplataforma (iOS/Android) construida 
 - `src/app/` - Rutas de Expo Router
 - `src/components/ui/` - Componentes UI reutilizables
 - `src/components/layout/` - Componentes de layout
-- `src/theme/` - Sistema de temas con Unistyles
+- `src/theme/` - Sistema de temas con Uniwind
 
 **Tecnologías:**
 
 - React Native
 - Expo Router (navegación file-based)
-- Gluestack UI (componentes)
-- React Native Unistyles (temas)
+- React Native Reusables (RNR) (componentes)
+- Uniwind (temas y utilidades CSS)
 
 **Flujo:**
 
@@ -147,10 +147,10 @@ const { data, isLoading } = useQuery({
 
 ### 3. Strategy Pattern
 
-Temas dinámicos con Unistyles:
+Temas dinámicos con Uniwind:
 
 ```typescript
-UnistylesRuntime.setTheme("naruto");
+Uniwind.setTheme("naruto");
 ```
 
 ### 4. Factory Pattern
@@ -239,7 +239,7 @@ const queryClient = new QueryClient({
 
 **Herramientas:**
 
-- UnistylesRuntime (tema actual)
+- Uniwind (tema actual)
 - Supabase Auth (sesión del usuario)
 
 **Evitamos:**
@@ -400,14 +400,14 @@ const { data, fetchNextPage } = useInfiniteQuery({
 - Optimistic updates
 - DevTools excelentes
 
-### ¿Por qué Unistyles?
+### ¿Por qué Uniwind?
 
-- Temas dinámicos sin re-renders
-- Performance superior a StyleSheet
+- Temas dinámicos y utilidades CSS v4
+- Sin re-renders pesados
 - TypeScript first
-- Responsive design fácil
+- Responsive design via Tailwind breakpoints
 
 ---
 
-**Versión:** 1.0  
+**Versión:** 1.1  
 **Última actualización:** Enero 2026

@@ -406,17 +406,17 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 
 ---
 
-**Versión:** 1.0  
+**Versión:** 1.1  
 **Última actualización:** Enero 2026
 
 ### Soporte Web (Dashboard)
+
 - [ ] Crear layout responsive (mobile vs web)
   - [ ] Tabs para mobile
   - [ ] Sidebar para web (opcional)
 - [ ] Adaptar gráficas para pantallas grandes
 - [ ] Probar dashboard en web (`npm run web`)
 - [ ] Optimizar visualización de datos
-
 
 ---
 
@@ -425,19 +425,20 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 ### Estas validaciones DEBEN implementarse en el código (no están en SQL)
 
 #### 1. Onboarding Forzado (Usuario sin Clan)
+
 **Dónde:** `app/_layout.tsx` o middleware de autenticación
 
 ```typescript
 // Verificar si usuario tiene clan
 const { data: profile } = await supabase
-  .from('profiles')
-  .select('clan_id')
-  .eq('id', user.id)
+  .from("profiles")
+  .select("clan_id")
+  .eq("id", user.id)
   .single();
 
 if (!profile.clan_id) {
   // Redirigir a pantalla de onboarding
-  router.replace('/onboarding');
+  router.replace("/onboarding");
   return;
 }
 ```
@@ -447,6 +448,7 @@ if (!profile.clan_id) {
 ---
 
 #### 2. Tarea Completada Solo 1 Vez por Frecuencia
+
 **Dónde:** `features/quests/hooks/useCompleteTask.ts`
 
 ```typescript
@@ -456,16 +458,16 @@ const startOfDay = new Date(today.setHours(0, 0, 0, 0));
 const endOfDay = new Date(today.setHours(23, 59, 59, 999));
 
 const { data: existingLog } = await supabase
-  .from('task_logs')
-  .select('*')
-  .eq('task_id', taskId)
-  .eq('user_id', userId)
-  .gte('completed_at', startOfDay.toISOString())
-  .lte('completed_at', endOfDay.toISOString())
+  .from("task_logs")
+  .select("*")
+  .eq("task_id", taskId)
+  .eq("user_id", userId)
+  .gte("completed_at", startOfDay.toISOString())
+  .lte("completed_at", endOfDay.toISOString())
   .single();
 
 if (existingLog) {
-  throw new Error('Ya completaste esta tarea hoy');
+  throw new Error("Ya completaste esta tarea hoy");
 }
 ```
 
@@ -476,25 +478,25 @@ if (existingLog) {
 ---
 
 #### 3. Admin No Puede Salir del Clan
+
 **Dónde:** `features/clan/hooks/useLeaveClan.ts`
 
 ```typescript
 // Verificar si usuario es admin del clan
 const { data: clan } = await supabase
-  .from('clans')
-  .select('admin_id')
-  .eq('id', clanId)
+  .from("clans")
+  .select("admin_id")
+  .eq("id", clanId)
   .single();
 
 if (clan.admin_id === userId) {
-  throw new Error('El admin no puede salir del clan. Transfiere el rol primero.');
+  throw new Error(
+    "El admin no puede salir del clan. Transfiere el rol primero.",
+  );
 }
 
 // Si no es admin, permitir salir
-await supabase
-  .from('profiles')
-  .update({ clan_id: null })
-  .eq('id', userId);
+await supabase.from("profiles").update({ clan_id: null }).eq("id", userId);
 ```
 
 **Razón:** Proteger integridad del clan
@@ -502,30 +504,30 @@ await supabase
 ---
 
 #### 4. Validar Balance Antes de Gastos
+
 **Dónde:** `features/wallet/hooks/useAddExpense.ts`
 
 ```typescript
 // Obtener balance actual
 const { data: wallet } = await supabase
-  .from('wallets')
-  .select('balance')
-  .eq('user_id', userId)
+  .from("wallets")
+  .select("balance")
+  .eq("user_id", userId)
   .single();
 
 // Validar que hay fondos suficientes
-if (wallet.balance + amount < 0) {  // amount es negativo para gastos
-  throw new Error('Saldos insuficientes');
+if (wallet.balance + amount < 0) {
+  // amount es negativo para gastos
+  throw new Error("Saldos insuficientes");
 }
 
 // Si hay fondos, crear transacción
-await supabase
-  .from('transactions')
-  .insert({
-    wallet_id: walletId,
-    amount: amount,  // negativo
-    type: 'expense',
-    description: description
-  });
+await supabase.from("transactions").insert({
+  wallet_id: walletId,
+  amount: amount, // negativo
+  type: "expense",
+  description: description,
+});
 ```
 
 **Razón:** Evitar race conditions con balance negativo
@@ -536,10 +538,9 @@ await supabase
 
 ### Resumen de Validaciones
 
-| Validación | Ubicación | Prioridad |
-|------------|-----------|-----------|
-| Onboarding forzado | `app/_layout.tsx` | 🔴 Crítica |
+| Validación          | Ubicación         | Prioridad  |
+| ------------------- | ----------------- | ---------- |
+| Onboarding forzado  | `app/_layout.tsx` | 🔴 Crítica |
 | Tarea 1 vez por día | `useCompleteTask` | 🔴 Crítica |
-| Admin no sale | `useLeaveClan` | 🟡 Alta |
-| Balance positivo | `useAddExpense` | 🟡 Alta |
-
+| Admin no sale       | `useLeaveClan`    | 🟡 Alta    |
+| Balance positivo    | `useAddExpense`   | 🟡 Alta    |

@@ -13,16 +13,13 @@
 ```bash
 # Instalar dependencias del proyecto
 npm install
-
-# Instalar dependencias adicionales recomendadas
-npm install react-hook-form zod date-fns @react-native-async-storage/async-storage
 ```
 
 **Dependencias principales (ya en package.json):**
 
 - `expo-router` - Navegación file-based
-- `react-native-unistyles` - Sistema de temas dinámicos
-- `@gluestack-ui/themed` - Componentes UI
+- `uniwind` - Sistema de temas dinámicos (Tailwind v4)
+- `@rn-primitives/*` - Componentes UI semánticos
 - `@supabase/supabase-js` - Cliente Supabase
 - `@tanstack/react-query` - Gestión de estado y caché
 - `victory-native` - Gráficos
@@ -161,9 +158,9 @@ El proyecto incluye 5 temas inspirados en cultura pop:
 **Cambiar tema:**
 
 ```typescript
-import { UnistylesRuntime } from "react-native-unistyles";
+import { Uniwind } from "uniwind";
 
-UnistylesRuntime.setTheme("naruto");
+Uniwind.setTheme("naruto");
 ```
 
 ---
@@ -230,5 +227,5 @@ Si ves errores de permisos:
 
 ---
 
-**Versión:** 1.0  
+**Versión:** 1.1  
 **Estado:** En desarrollo 🚧

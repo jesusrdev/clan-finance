@@ -178,6 +178,7 @@
 ---
 
 **Total de casos de uso**: 43  
+**Versión**: 1.1
 **Casos de uso por rol**:
 
 - Admin exclusivo: 18

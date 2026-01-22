@@ -26,8 +26,8 @@ Todas las dependencias están definidas en `package.json`.
 
 ### Estilos y UI
 
-- `react-native-unistyles` - Sistema de temas
-- `@gluestack-ui/themed` - Componentes UI
+- `uniwind` - Sistema de temas (Tailwind v4)
+- `@rn-primitives/*` - Componentes UI (React Native Reusables)
 
 ### Backend y Estado
 

@@ -199,9 +199,9 @@ erDiagram
 ```mermaid
 graph TB
     subgraph "Presentation Layer"
-        UI[UI ComponentsGluestack UI]
-        Themes[Theming SystemUnistyles]
-        Router[NavigationExpo Router]
+        UI[UI Components <br/> RNR Primitives]
+        Themes[Theming System <br/> Uniwind]
+        Router[Navigation <br/> Expo Router]
     end
 
     subgraph "Application Layer"

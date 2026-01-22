@@ -32,10 +32,10 @@ npm run web
 #### ✅ Funciona en Web
 
 - Victory Native (gráficas)
-- React Native Unistyles (temas)
+- Uniwind (Tailwind v4) (temas)
 - Supabase (queries y RLS)
 - TanStack Query (caché)
-- Gluestack UI (componentes)
+- React Native Reusables (componentes)
 
 #### ⚠️ Requiere Adaptación
 
@@ -45,26 +45,12 @@ npm run web
 
 ### Responsive Design
 
-Usar Unistyles para adaptar UI:
+Usar clases de Uniwind/Tailwind para adaptar UI:
 
-```typescript
-import { createStyleSheet, useStyles } from "react-native-unistyles";
-
-const stylesheet = createStyleSheet((theme) => ({
-  container: {
-    padding: {
-      xs: 16, // Mobile
-      md: 24, // Tablet
-      lg: 32, // Desktop
-    },
-  },
-  dashboard: {
-    flexDirection: {
-      xs: "column", // Mobile: stack vertical
-      lg: "row", // Desktop: layout horizontal
-    },
-  },
-}));
+```tsx
+<View className="p-xs md:p-md lg:p-lg flex-col lg:flex-row">
+  {/* Contenido adaptable */}
+</View>
 ```
 
 ## 📊 Dashboard Recomendado

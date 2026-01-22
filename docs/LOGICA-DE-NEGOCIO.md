@@ -226,6 +226,7 @@ Acción: Deep link a /clan/requests
    ```
 
 4. **Monto de Payout:**
+
    ```sql
    CHECK (amount >= 0)
    ```
@@ -251,6 +252,7 @@ Acción: Deep link a /clan/requests
    - Un usuario no puede solicitar dos veces al mismo clan
 
 3. **Wallet por Usuario:**
+
    ```sql
    UNIQUE (user_id)
    ```
@@ -342,5 +344,5 @@ Acción: Deep link a /clan/requests
 
 ---
 
-**Versión:** 1.0  
+**Versión:** 1.1  
 **Última actualización:** Enero 2026

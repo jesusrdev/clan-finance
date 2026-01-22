@@ -40,16 +40,16 @@ Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 
 ## 🛠️ Stack Tecnológico
 
-| Capa                 | Tecnología             | Propósito                              |
-| -------------------- | ---------------------- | -------------------------------------- |
-| **Framework**        | Expo (React Native)    | Desarrollo multiplataforma iOS/Android |
-| **Navegación**       | Expo Router            | Navegación file-based con TypeScript   |
-| **Estilos**          | React Native Unistyles | Temas dinámicos y responsive design    |
-| **UI Components**    | Gluestack UI v2        | Componentes accesibles y customizables |
-| **Backend**          | Supabase               | PostgreSQL + Auth + Realtime           |
-| **State Management** | TanStack Query v5      | Caché y sincronización de datos        |
-| **Gráficos**         | Victory Native XL      | Visualización de progreso y gastos     |
-| **Notificaciones**   | Expo Notifications     | Recordatorios locales programados      |
+| Capa                 | Tecnología            | Propósito                              |
+| -------------------- | --------------------- | -------------------------------------- |
+| **Framework**        | Expo (React Native)   | Desarrollo multiplataforma iOS/Android |
+| **Navegación**       | Expo Router           | Navegación file-based con TypeScript   |
+| **Estilos**          | Uniwind (Tailwind v4) | Temas dinámicos y utilidades CSS       |
+| **UI Components**    | RNR (Primitives)      | Componentes accesibles y semánticos    |
+| **Backend**          | Supabase              | PostgreSQL + Auth + Realtime           |
+| **State Management** | TanStack Query v5     | Caché y sincronización de datos        |
+| **Gráficos**         | Victory Native XL     | Visualización de progreso y gastos     |
+| **Notificaciones**   | Expo Notifications    | Recordatorios locales programados      |
 
 ### Dependencias Adicionales
 
@@ -133,9 +133,8 @@ clan-finance/
 │   │   ├── models.ts            # Tipos de negocio
 │   │   └── dto.ts               # Data Transfer Objects
 │   ├── hooks/                   # 🪝 Custom React hooks
-│   ├── theme/                   # 🎨 Sistema de temas
-│   │   ├── themes.ts            # 5 skins definidos
-│   │   └── unistyles.ts         # Configuración Unistyles
+│   ├── theme/                   # 🎨 Configuración global de estilos
+│   │   └── global.css           # Tokens y temas (Uniwind)
 │   └── constants/               # 🔢 Constantes y config
 ├── assets/                      # 🖼️ Imágenes y recursos
 ├── .env.example                # Template de variables
@@ -194,7 +193,7 @@ Este proyecto es privado y propietario.
 
 ---
 
-**Versión:** 1.0  
+**Versión:** 1.1  
 **Estado:** En desarrollo 🚧  
 **Última actualización:** Enero 2026
 

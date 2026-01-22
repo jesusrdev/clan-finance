@@ -199,7 +199,7 @@ flowchart TD
     Confirm -->|No| SelectTheme
     Confirm -->|Sí| UpdateDB[UPDATE profiles<br/>SET selected_theme = ?]
 
-    UpdateDB --> UpdateRuntime[UnistylesRuntime.setTheme]
+    UpdateDB --> UpdateRuntime[Uniwind.setTheme]
     UpdateRuntime --> ReloadUI[Recargar UI con nuevo tema]
     ReloadUI --> End([Tema aplicado])
 ```
