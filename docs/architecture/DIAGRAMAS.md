@@ -199,34 +199,34 @@ erDiagram
 ```mermaid
 graph TB
     subgraph "Presentation Layer"
-        UI[UI Components<br/>Gluestack UI]
-        Themes[Theming System<br/>Unistyles]
-        Router[Navigation<br/>Expo Router]
+        UI[UI ComponentsGluestack UI]
+        Themes[Theming SystemUnistyles]
+        Router[NavigationExpo Router]
     end
 
     subgraph "Application Layer"
-        Features[Features Modules<br/>auth, clan, quests, wallet, profile]
-        Hooks[Custom Hooks<br/>useAuth, useClan, useTasks]
-        State[State Management<br/>TanStack Query]
+        Features[Features Modulesauth, clan, quests, wallet, profile]
+        Hooks[Custom HooksuseAuth, useClan, useTasks]
+        State[State ManagementTanStack Query]
     end
 
     subgraph "Domain Layer"
-        Models[Domain Models<br/>types/models.ts]
-        DTOs[Data Transfer Objects<br/>types/dto.ts]
-        Constants[Constants & Config<br/>constants/index.ts]
+        Models[Domain Modelstypes/models.ts]
+        DTOs[Data Transfer Objectstypes/dto.ts]
+        Constants[Constants & Configconstants/index.ts]
     end
 
     subgraph "Infrastructure Layer"
-        SupabaseClient[Supabase Client<br/>lib/supabase/client.ts]
-        QueryClient[Query Client<br/>lib/query/client.ts]
+        SupabaseClient[Supabase Clientlib/supabase/client.ts]
+        QueryClient[Query Clientlib/query/client.ts]
         Cache[Query Cache]
     end
 
     subgraph "Backend - Supabase"
-        Auth[Authentication<br/>Supabase Auth]
-        DB[(PostgreSQL<br/>Database)]
-        RLS[Row Level Security<br/>Policies]
-        Triggers[Database Triggers<br/>& Functions]
+        Auth[AuthenticationSupabase Auth]
+        DB[(PostgreSQLDatabase)]
+        RLS[Row Level SecurityPolicies]
+        Triggers[Database Triggers& Functions]
     end
 
     UI --> Router
@@ -274,11 +274,11 @@ flowchart LR
 ```mermaid
 graph TB
     subgraph "Mobile App"
-        App[App Entry Point<br/>app/_layout.tsx]
+        App[App Entry Pointapp/_layout.tsx]
 
         subgraph "Routes"
-            Auth[Auth Routes<br/>(auth)/]
-            Tabs[Tab Routes<br/>(tabs)/]
+            Auth[Auth Routes <br/> auth/]
+            Tabs[Tab Routes <br/> tabs/]
         end
 
         subgraph "Features"
