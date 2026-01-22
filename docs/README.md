@@ -4,15 +4,18 @@
 
 ```
 docs/
-├── INICIO.md                # Guía de instalación y configuración
-├── CASOS-DE-USO.md          # 43 casos de uso atómicos
+├── README.md                # Este archivo (índice)
+├── INICIO.md                # Instalación y configuración
 ├── DESARROLLO.md            # Roadmap con checkboxes por fase
+├── CASOS-DE-USO.md          # 43 casos de uso atómicos
+├── DEPENDENCIAS.md          # Gestión de dependencias
 ├── LOGICA-DE-NEGOCIO.md     # Flujos y reglas de negocio
-├── architecture/
+├── SOPORTE-WEB.md           # Dashboard web
+├── architecture/            # Arquitectura del sistema
 │   ├── ARQUITECTURA.md      # Principios y patrones
 │   ├── DIAGRAMAS.md         # UML, ER, capas, componentes
 │   └── FLUJOS.md            # Diagramas de secuencia
-└── database/
+└── database/                # Base de datos
     ├── supabase-schema.sql  # Script SQL completo
     └── SEGURIDAD-RLS.md     # Políticas de seguridad
 ```

@@ -216,9 +216,9 @@ flowchart TD
     Decision -->|Aprobar| Approve[UPDATE join_requests<br/>SET status='approved']
 
     Approve --> AddToClan[UPDATE profiles<br/>SET clan_id]
-    AddToClan --> NotifyUser[Notificar usuario:<br/>"¡Bienvenido!"]
+    AddToClan --> NotifyUser[Notificar usuario:<br/>¡Bienvenido!]
 
-    Reject --> NotifyReject[Notificar usuario:<br/>"Solicitud rechazada"]
+    Reject --> NotifyReject[Notificar usuario:<br/>Solicitud rechazada]
 
     NotifyUser --> End([Fin])
     NotifyReject --> End

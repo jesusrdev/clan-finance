@@ -408,3 +408,12 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 
 **Versión:** 1.0  
 **Última actualización:** Enero 2026
+
+### Soporte Web (Dashboard)
+- [ ] Crear layout responsive (mobile vs web)
+  - [ ] Tabs para mobile
+  - [ ] Sidebar para web (opcional)
+- [ ] Adaptar gráficas para pantallas grandes
+- [ ] Probar dashboard en web (`npm run web`)
+- [ ] Optimizar visualización de datos
+

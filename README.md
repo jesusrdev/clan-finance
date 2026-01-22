@@ -22,7 +22,8 @@ Aplicación móvil de finanzas familiares gamificada donde las tareas del hogar 
 
 ```bash
 # 1. Instalar dependencias
-bash install-dependencies.sh
+npm install
+
 
 # 2. Configurar variables de entorno
 cp .env.example .env
@@ -49,6 +50,15 @@ Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 | **State Management** | TanStack Query v5      | Caché y sincronización de datos        |
 | **Gráficos**         | Victory Native XL      | Visualización de progreso y gastos     |
 | **Notificaciones**   | Expo Notifications     | Recordatorios locales programados      |
+
+### Dependencias Adicionales
+
+| Librería                                    | Propósito                           |
+| ------------------------------------------- | ----------------------------------- |
+| `react-hook-form` + `zod`                   | Validación de formularios type-safe |
+| `date-fns`                                  | Manejo y formateo de fechas         |
+| `@react-native-async-storage/async-storage` | Persistencia local (tema, sesión)   |
+| `expo-web-browser`                          | Soporte web para dashboard          |
 
 ## 🎨 Temas (Skins)
 
@@ -86,12 +96,21 @@ Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 
 ```
 clan-finance/
-├── docs/                          # 📚 Documentación completa
-│   ├── architecture/              # Arquitectura y diagramas
-│   ├── database/                  # SQL y seguridad RLS
-│   ├── CASOS-DE-USO.md           # 43 casos de uso
-│   ├── DESARROLLO.md             # Guía con checkboxes
-│   └── INICIO.md                 # Instalación y setup
+├── docs/                        # 📚 Documentación completa
+│   ├── README.md                # Índice de documentación
+│   ├── INICIO.md                # Guía de instalación y setup
+│   ├── DESARROLLO.md            # Roadmap con checkboxes por fase
+│   ├── CASOS-DE-USO.md          # 43 casos de uso atómicos
+│   ├── DEPENDENCIAS.md          # Gestión de dependencias
+│   ├── LOGICA-DE-NEGOCIO.md     # Flujos y reglas de negocio
+│   ├── SOPORTE-WEB.md           # Dashboard web
+│   ├── architecture/            # Arquitectura y diagramas
+│   │   ├── ARQUITECTURA.md      # Principios y patrones
+│   │   ├── DIAGRAMAS.md         # UML, ER, capas
+│   │   └── FLUJOS.md            # Diagramas de secuencia
+│   └── database/                # Base de datos
+│       ├── supabase-schema.sql  # Script SQL completo
+│       └── SEGURIDAD-RLS.md     # Políticas de seguridad
 ├── src/
 │   ├── app/                      # 🧭 Expo Router (navegación)
 │   │   ├── (auth)/              # Autenticación
@@ -119,7 +138,6 @@ clan-finance/
 │   │   └── unistyles.ts         # Configuración Unistyles
 │   └── constants/               # 🔢 Constantes y config
 ├── assets/                      # 🖼️ Imágenes y recursos
-├── install-dependencies.sh      # Script de instalación
 ├── .env.example                # Template de variables
 ├── package.json
 ├── tsconfig.json               # TypeScript con path aliases

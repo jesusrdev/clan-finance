@@ -8,21 +8,17 @@
 - **Cuenta en Supabase** ([supabase.com](https://supabase.com))
 - **Expo CLI** (se instala automáticamente)
 
-### Paso 1: Clonar e Instalar Dependencias
+### Paso 1: Instalar Dependencias
 
 ```bash
-# Clonar el repositorio (si aplica)
-git clone <repository-url>
-cd clan-finance
-
-# Instalar dependencias
-bash install-dependencies.sh
-
-# O manualmente
+# Instalar dependencias del proyecto
 npm install
+
+# Instalar dependencias adicionales recomendadas
+npm install react-hook-form zod date-fns @react-native-async-storage/async-storage
 ```
 
-**Dependencias instaladas:**
+**Dependencias principales (ya en package.json):**
 
 - `expo-router` - Navegación file-based
 - `react-native-unistyles` - Sistema de temas dinámicos
@@ -34,6 +30,15 @@ npm install
 - `expo-sharing` - Compartir códigos de invitación
 - `react-native-reanimated` - Animaciones
 - `react-native-gesture-handler` - Gestos
+
+**Dependencias adicionales recomendadas:**
+
+- `react-hook-form` - Validación de formularios
+- `zod` - Schemas de validación type-safe
+- `date-fns` - Manejo de fechas
+- `@react-native-async-storage/async-storage` - Storage persistente
+
+Ver [DEPENDENCIAS.md](DEPENDENCIAS.md) para más detalles sobre por qué estas dependencias.
 
 ### Paso 2: Configurar Variables de Entorno
 
