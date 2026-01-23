@@ -11,6 +11,7 @@ import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+// import { Image } from "react-native";
 import { Image } from "expo-image";
 
 const ONBOARDING_STEPS = [
@@ -18,21 +19,21 @@ const ONBOARDING_STEPS = [
     title: "Gestiona como un Pro",
     description:
       "Controla tus finanzas familiares con un toque de aventura pirata o ninja.",
-    image: require("../../assets/onboarding_1.png"),
+    image: require("@/../assets/onboarding_1.png"),
     bgColor: "bg-blue-500/5",
   },
   {
     title: "Completa Quests",
     description:
       "Ahorrar nunca fue tan divertido. ¡Gana premios por tus logros diarios!",
-    image: require("../../assets/onboarding_2.png"),
+    image: require("@/../assets/onboarding_2.png"),
     bgColor: "bg-orange-500/5",
   },
   {
     title: "Skins de Anime",
     description:
       "Desbloquea estilos legendarios de tus animes favoritos para tu app.",
-    image: require("../../assets/onboarding_3.png"),
+    image: require("@/../assets/onboarding_3.png"),
     bgColor: "bg-red-500/5",
   },
 ];
@@ -62,14 +63,15 @@ export default function WelcomeScreen() {
       <View className="w-full max-w-md">
         <View
           className={cn(
-            "w-full aspect-square max-w-[320px] mx-auto rounded-3xl overflow-hidden mb-8 shadow-xl shadow-black/20",
+            "w-full aspect-square max-w-xs mx-auto rounded-3xl overflow-hidden mb-8 shadow-xl shadow-black/20",
             item.bgColor,
           )}
         >
           <Image
             source={item.image}
-            className="w-full h-full"
-            contentFit="contain"
+            style={{ width: "100%", height: "100%" }}
+            // contentFit="contain"
+            // contentMode="contain"
           />
         </View>
         <Text className="text-3xl font-bold text-foreground text-center mb-4 px-4">
@@ -83,7 +85,7 @@ export default function WelcomeScreen() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="bg-background" style={{ flex: 1 }}>
       <View
         className="flex-1 w-full max-w-2xl mx-auto justify-between py-6"
         onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}

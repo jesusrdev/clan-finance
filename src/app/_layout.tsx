@@ -11,6 +11,7 @@ import { NAV_THEME } from "@/lib/theme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useUniwind } from "uniwind";
 import { ToastProvider } from "@/components/ui/toast";
+import { Platform } from "react-native";
 
 export default function RootLayout() {
   const { session, loading } = useAuth();
@@ -21,14 +22,26 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loading) return;
+    router.replace("/");
+  }, [loading]);
+
+  useEffect(() => {
+    if (loading) return;
 
     const inAuthGroup = segments[0] === "(auth)";
     const inTabsGroup = segments[0] === "(tabs)";
-    const atWelcome = !inAuthGroup && !inTabsGroup;
+    // const atRoot = segments.length === 0 || (!inAuthGroup && !inTabsGroup);
 
-    if (session && (inAuthGroup || atWelcome)) {
-      // Si hay sesión y estamos en auth o en el welcome, ir a tabs
-      router.replace("/(tabs)");
+    if (session) {
+      // Usuario autenticado: siempre ir a tabs
+      if (!inTabsGroup) {
+        router.replace("/(tabs)");
+      }
+    } else {
+      // Usuario NO autenticado: ir a welcome si está en tabs
+      if (inTabsGroup) {
+        router.replace("/");
+      }
     }
   }, [session, loading, segments]);
 

@@ -14,7 +14,7 @@ export default function ThemeSelectionScreen() {
   const { theme } = useUniwind();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="bg-background" style={{ flex: 1 }}>
       <View className="flex-1 w-full max-w-2xl mx-auto px-6 py-6">
         {/* Header */}
         <View className="mb-6">

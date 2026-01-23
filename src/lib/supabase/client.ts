@@ -26,6 +26,6 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
     storage: isServer ? NoopStorage : AsyncStorage,
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: false,
+    detectSessionInUrl: true, // CRÍTICO: Permite detectar tokens OAuth en la URL
   },
 });
