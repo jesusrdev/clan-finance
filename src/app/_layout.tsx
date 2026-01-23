@@ -22,12 +22,11 @@ export default function RootLayout() {
     if (loading) return;
 
     const inAuthGroup = segments[0] === "(auth)";
+    const inTabsGroup = segments[0] === "(tabs)";
+    const atWelcome = !inAuthGroup && !inTabsGroup;
 
-    if (!session && !inAuthGroup) {
-      // Si no hay sesión y no estamos en auth, ir a login
-      router.replace("/login");
-    } else if (session && inAuthGroup) {
-      // Si hay sesión y estamos en auth, ir a tabs
+    if (session && (inAuthGroup || atWelcome)) {
+      // Si hay sesión y estamos en auth o en el welcome, ir a tabs
       router.replace("/(tabs)");
     }
   }, [session, loading, segments]);

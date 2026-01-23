@@ -1,88 +1,160 @@
 import { DarkTheme, DefaultTheme, type Theme } from "@react-navigation/native";
 
-export const THEME = {
+export const THEME_METADATA = {
   light: {
-    background: "hsl(0 0% 100%)", // white
-    foreground: "hsl(240 10% 3.9%)", // foreground
-    card: "hsl(0 0% 100%)", // card
-    cardForeground: "hsl(240 10% 3.9%)", // card-foreground
-    popover: "hsl(0 0% 100%)", // popover
-    popoverForeground: "hsl(240 10% 3.9%)", // popover-foreground
-    primary: "hsl(0 75% 48%)", // primary #d91e1e
-    primaryForeground: "hsl(0 0% 100%)", // primary-foreground
-    secondary: "hsl(240 4.8% 95.9%)", // secondary
-    secondaryForeground: "hsl(240 5.9% 10%)", // secondary-foreground
-    muted: "hsl(240 4.8% 95.9%)", // muted
-    mutedForeground: "hsl(240 3.8% 46.1%)", // muted-foreground
-    accent: "hsl(240 4.8% 95.9%)", // accent
-    accentForeground: "hsl(240 5.9% 10%)", // accent-foreground
-    destructive: "hsl(0 84.2% 60.2%)", // destructive
-    destructiveForeground: "hsl(0 0% 98%)",
-    border: "hsl(240 5.9% 90%)", // border
-    input: "hsl(240 5.9% 90%)", // input
-    ring: "hsl(0 75% 48%)", // ring
-    radius: "0.5rem",
+    name: "Luz Clara",
+    icon: "☀️",
+    description: "Limpio y profesional",
+    color: "#ffffff",
+    item: "Cristal",
   },
   dark: {
-    background: "hsl(240 10% 3.9%)", // background
-    foreground: "hsl(0 0% 98%)", // foreground
-    card: "hsl(240 10% 3.9%)", // card
-    cardForeground: "hsl(0 0% 98%)", // card-foreground
-    popover: "hsl(240 10% 3.9%)", // popover
-    popoverForeground: "hsl(0 0% 98%)", // popover-foreground
-    primary: "hsl(0 100% 63%)", // primary #ff4444
-    primaryForeground: "hsl(0 0% 100%)", // primary-foreground
-    secondary: "hsl(240 3.7% 15.9%)", // secondary
-    secondaryForeground: "hsl(0 0% 98%)", // secondary-foreground
-    muted: "hsl(240 3.7% 15.9%)", // muted
-    mutedForeground: "hsl(240 5% 64.9%)", // muted-foreground
-    accent: "hsl(240 3.7% 15.9%)", // accent
-    accentForeground: "hsl(0 0% 98%)", // accent-foreground
-    destructive: "hsl(0 62.8% 30.6%)", // destructive
-    destructiveForeground: "hsl(0 0% 98%)",
-    border: "hsl(240 3.7% 15.9%)", // border
-    input: "hsl(240 3.7% 15.9%)", // input
-    ring: "hsl(0 100% 63%)", // ring
-    radius: "0.5rem",
+    name: "Noche Oscura",
+    icon: "🌙",
+    description: "Elegante y minimalista",
+    color: "#09090b",
+    item: "Vacío",
+  },
+  onePiece: {
+    name: "Gran Ruta",
+    icon: "☠️",
+    description: "¡Aventuras en el mar!",
+    color: "#df1e26", // Luffy Red
+    item: "Pergamino",
+  },
+  demonSlayer: {
+    name: "Respiración Solar",
+    icon: "⚔️",
+    description: "Poder del sol y la espada",
+    color: "#ff4500", // Fiery Orange-Red
+    item: "Katana",
+  },
+  naruto: {
+    name: "Senda del Hokage",
+    icon: "🍥",
+    description: "Energía pura y determinación",
+    color: "#ff8c00", // Kyuubi Orange
+    item: "Shuriken",
+  },
+  dragonBall: {
+    name: "Guerrero Z",
+    icon: "🐲",
+    description: "Fuerza explosiva Saiyan",
+    color: "#f1c40f", // Super Saiyan Yellow
+    item: "Esfera del Dragón",
+  },
+  strangerThings: {
+    name: "Mundo del Revés",
+    icon: "🧇",
+    description: "Misterio ochentero láser",
+    color: "#f40d17", // Netflix Red
+    item: "Láser",
   },
 };
 
-export const NAV_THEME: Record<string, Theme> = {
+export const THEME = {
   light: {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: THEME.light.background,
-      border: THEME.light.border,
-      card: THEME.light.card,
-      notification: THEME.light.destructive,
-      primary: THEME.light.primary,
-      text: THEME.light.foreground,
-    },
+    background: "#ffffff",
+    foreground: "#09090b",
+    card: "#ffffff",
+    cardForeground: "#09090b",
+    primary: "#0f172a",
+    primaryForeground: "#ffffff",
+    border: "#e2e8f0",
+    notification: "#ef4444",
+    text: "#0f172a",
   },
   dark: {
-    ...DarkTheme,
-    colors: {
-      ...DarkTheme.colors,
-      background: THEME.dark.background,
-      border: THEME.dark.border,
-      card: THEME.dark.card,
-      notification: THEME.dark.destructive,
-      primary: THEME.dark.primary,
-      text: THEME.dark.foreground,
-    },
+    background: "#09090b",
+    foreground: "#fafafa",
+    card: "#18181b",
+    cardForeground: "#fafafa",
+    primary: "#ffffff",
+    primaryForeground: "#09090b",
+    border: "#27272a",
+    notification: "#7f1d1d",
+    text: "#fafafa",
   },
   onePiece: {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: "hsl(39 77% 91%)", // #fdf5e6
-      border: "hsl(18 47% 12%)", // #2c1810
-      card: "hsl(0 0% 100%)",
-      notification: "hsl(0 75% 48%)",
-      primary: "hsl(0 75% 48%)",
-      text: "hsl(18 47% 12%)",
-    },
+    background: "#fffbf0",
+    foreground: "#4a3321",
+    card: "#ffffff",
+    cardForeground: "#4a3321",
+    primary: "#df1e26",
+    primaryForeground: "#ffffff",
+    border: "#d4a373",
+    notification: "#df1e26",
+    text: "#4a3321",
   },
-  // Add other anime themes as needed if they use different NAV colors
+  demonSlayer: {
+    background: "#0a0a0a",
+    foreground: "#ffffff",
+    card: "#1a0a0a", // Slight reddish card
+    cardForeground: "#ffffff",
+    primary: "#ff4500",
+    primaryForeground: "#ffffff",
+    border: "#8b0000",
+    notification: "#ff4500",
+    text: "#ffffff",
+  },
+  naruto: {
+    background: "#121212",
+    foreground: "#ffffff",
+    card: "#1e1e1e",
+    cardForeground: "#ffffff",
+    primary: "#ff8c00",
+    primaryForeground: "#ffffff",
+    border: "#2563eb",
+    notification: "#ef4444",
+    text: "#ffffff",
+  },
+  dragonBall: {
+    background: "#2b3eb1",
+    foreground: "#ffffff",
+    card: "#3a4ac6",
+    cardForeground: "#ffffff",
+    primary: "#f1c40f",
+    primaryForeground: "#2c3e50",
+    border: "#e67e22",
+    notification: "#e74c3c",
+    text: "#ffffff",
+  },
+  strangerThings: {
+    background: "#050101",
+    foreground: "#ffffff",
+    card: "#121212",
+    cardForeground: "#ffffff",
+    primary: "#f40d17",
+    primaryForeground: "#ffffff",
+    border: "#8b0000",
+    notification: "#f40d17",
+    text: "#ffffff",
+  },
 };
+
+export const NAV_THEME: Record<string, Theme> = Object.entries(THEME).reduce(
+  (acc, [key, val]) => {
+    const isDark = [
+      "dark",
+      "demonSlayer",
+      "dragonBall",
+      "strangerThings",
+      "naruto",
+    ].includes(key);
+    const baseTheme = isDark ? DarkTheme : DefaultTheme;
+    acc[key] = {
+      ...baseTheme,
+      colors: {
+        ...baseTheme.colors,
+        background: val.background,
+        border: val.border,
+        card: val.card,
+        notification: val.notification,
+        primary: val.primary,
+        text: val.text,
+      },
+    };
+    return acc;
+  },
+  {} as Record<string, Theme>,
+);
