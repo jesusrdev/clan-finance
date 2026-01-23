@@ -19,35 +19,35 @@ export const THEME_METADATA = {
     name: "Gran Ruta",
     icon: "☠️",
     description: "¡Aventuras en el mar!",
-    color: "#df1e26", // Luffy Red
+    color: "#df1e26",
     item: "Pergamino",
   },
   demonSlayer: {
     name: "Respiración Solar",
     icon: "⚔️",
     description: "Poder del sol y la espada",
-    color: "#ff4500", // Fiery Orange-Red
+    color: "#ff4500",
     item: "Katana",
   },
   naruto: {
     name: "Senda del Hokage",
     icon: "🍥",
     description: "Energía pura y determinación",
-    color: "#ff8c00", // Kyuubi Orange
+    color: "#ff8c00",
     item: "Shuriken",
   },
   dragonBall: {
     name: "Guerrero Z",
     icon: "🐲",
     description: "Fuerza explosiva Saiyan",
-    color: "#f1c40f", // Super Saiyan Yellow
+    color: "#f1c40f",
     item: "Esfera del Dragón",
   },
   strangerThings: {
     name: "Mundo del Revés",
     icon: "🧇",
     description: "Misterio ochentero láser",
-    color: "#f40d17", // Netflix Red
+    color: "#f40d17",
     item: "Láser",
   },
 };
@@ -63,6 +63,10 @@ export const THEME = {
     border: "#e2e8f0",
     notification: "#ef4444",
     text: "#0f172a",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#d91e1e",
+    info: "#2196f3",
   },
   dark: {
     background: "#09090b",
@@ -74,6 +78,10 @@ export const THEME = {
     border: "#27272a",
     notification: "#7f1d1d",
     text: "#fafafa",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#f44336",
+    info: "#2196f3",
   },
   onePiece: {
     background: "#fffbf0",
@@ -85,17 +93,25 @@ export const THEME = {
     border: "#d4a373",
     notification: "#df1e26",
     text: "#4a3321",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#d91e1e",
+    info: "#2196f3",
   },
   demonSlayer: {
     background: "#0a0a0a",
     foreground: "#ffffff",
-    card: "#1a0a0a", // Slight reddish card
+    card: "#1a0a0a",
     cardForeground: "#ffffff",
     primary: "#ff4500",
     primaryForeground: "#ffffff",
     border: "#8b0000",
     notification: "#ff4500",
     text: "#ffffff",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#f44336",
+    info: "#2196f3",
   },
   naruto: {
     background: "#121212",
@@ -107,6 +123,10 @@ export const THEME = {
     border: "#2563eb",
     notification: "#ef4444",
     text: "#ffffff",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#f44336",
+    info: "#2196f3",
   },
   dragonBall: {
     background: "#2b3eb1",
@@ -118,6 +138,10 @@ export const THEME = {
     border: "#e67e22",
     notification: "#e74c3c",
     text: "#ffffff",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#f44336",
+    info: "#2196f3",
   },
   strangerThings: {
     background: "#050101",
@@ -129,6 +153,10 @@ export const THEME = {
     border: "#8b0000",
     notification: "#f40d17",
     text: "#ffffff",
+    success: "#4caf50",
+    warning: "#ff9800",
+    error: "#e20713",
+    info: "#2196f3",
   },
 };
 

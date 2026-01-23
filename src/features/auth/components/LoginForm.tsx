@@ -27,6 +27,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "expo-router";
 import { useUniwind } from "uniwind";
 import { THEME_METADATA } from "@/lib/theme";
+import { useToast } from "@/components/ui/toast";
 
 export function LoginForm() {
   const [email, setEmail] = React.useState("");
@@ -38,6 +39,7 @@ export function LoginForm() {
   const router = useRouter();
   const { theme } = useUniwind();
   const metadata = THEME_METADATA[theme as keyof typeof THEME_METADATA];
+  const toast = useToast();
 
   function onEmailSubmitEditing() {
     passwordInputRef.current?.focus();
@@ -45,7 +47,11 @@ export function LoginForm() {
 
   async function onSubmit() {
     if (!email || !password) {
-      Alert.alert("Error", "Por favor ingresa tu correo y contraseña");
+      toast.show(
+        "¡Misión Interrumpida!",
+        "Para entrar a tu Clan, necesitamos tu correo y contraseña.",
+        "error",
+      );
       return;
     }
 
@@ -53,7 +59,15 @@ export function LoginForm() {
     try {
       await signIn(email, password);
     } catch (e: any) {
-      Alert.alert("Error de inicio de sesión", e.message);
+      let message = e.message;
+      if (message.includes("Invalid login credentials")) {
+        message =
+          "¿Has olvidado las llaves de tu Clan? Las credenciales no parecen correctas.";
+      } else if (message.includes("Email not confirmed")) {
+        message =
+          "¡Un momento! Tu pergamino aún no ha sido confirmado. Revisa tu correo.";
+      }
+      toast.show("¡Misión Fallida!", message, "error");
     } finally {
       setLoading(false);
     }
@@ -144,7 +158,7 @@ export function LoginForm() {
             <Text className="text-base text-muted-foreground font-medium">
               ¿Eres nuevo aquí?{" "}
             </Text>
-            <Pressable onPress={() => router.push("/register")}>
+            <Pressable onPress={() => router.replace("/register")}>
               <Text className="text-base font-bold text-primary">
                 Crea tu Clan
               </Text>

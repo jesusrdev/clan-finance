@@ -15,7 +15,7 @@ export function RegisterScreen() {
       {/* Top Bar with Back Button */}
       <View className="flex-row items-center px-4 h-14">
         <Pressable
-          onPress={() => router.back()}
+          onPress={() => router.replace("/login")}
           className="flex-row items-center gap-1 active:opacity-50"
         >
           <ChevronLeft size={24} color="gray" />

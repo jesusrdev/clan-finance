@@ -1,10 +1,9 @@
 import {
   View,
-  ScrollView,
-  Dimensions,
   Pressable,
-  Image,
-  Platform,
+  FlatList,
+  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import { Text } from "@/components/ui/text";
 import { Button } from "@/components/ui/button";
@@ -12,8 +11,7 @@ import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import { Image } from "expo-image";
 
 const ONBOARDING_STEPS = [
   {
@@ -42,23 +40,53 @@ const ONBOARDING_STEPS = [
 export default function WelcomeScreen() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const containerWidth = React.useRef(SCREEN_WIDTH);
+  const { width: windowWidth } = useWindowDimensions();
+  const [containerWidth, setContainerWidth] = React.useState(windowWidth);
+  const flatListRef = React.useRef<FlatList>(null);
 
-  const handleLayout = (event: any) => {
-    containerWidth.current = event.nativeEvent.layout.width;
-  };
+  const onViewableItemsChanged = React.useRef(({ viewableItems }: any) => {
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index || 0);
+    }
+  }).current;
 
-  const handleScroll = (event: any) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / containerWidth.current);
-    setActiveIndex(index);
-  };
+  const viewabilityConfig = React.useRef({
+    itemVisiblePercentThreshold: 50,
+  }).current;
+
+  const renderItem = ({ item }: { item: (typeof ONBOARDING_STEPS)[0] }) => (
+    <View
+      style={{ width: containerWidth }}
+      className="items-center justify-center px-8"
+    >
+      <View className="w-full max-w-md">
+        <View
+          className={cn(
+            "w-full aspect-square max-w-[320px] mx-auto rounded-3xl overflow-hidden mb-8 shadow-xl shadow-black/20",
+            item.bgColor,
+          )}
+        >
+          <Image
+            source={item.image}
+            className="w-full h-full"
+            contentFit="contain"
+          />
+        </View>
+        <Text className="text-3xl font-bold text-foreground text-center mb-4 px-4">
+          {item.title}
+        </Text>
+        <Text className="text-muted-foreground text-center text-lg leading-7 px-2">
+          {item.description}
+        </Text>
+      </View>
+    </View>
+  );
 
   return (
     <SafeAreaView className="flex-1 bg-background">
       <View
-        onLayout={handleLayout}
         className="flex-1 w-full max-w-2xl mx-auto justify-between py-6"
+        onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
       >
         {/* Logo / Header */}
         <View className="items-center px-6 mb-4">
@@ -72,40 +100,22 @@ export default function WelcomeScreen() {
 
         {/* Carousel */}
         <View className="flex-1">
-          <ScrollView
+          <FlatList
+            ref={flatListRef}
+            data={ONBOARDING_STEPS}
+            renderItem={renderItem}
+            keyExtractor={(_, index) => index.toString()}
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
-          >
-            {ONBOARDING_STEPS.map((step, index) => (
-              <View
-                key={index}
-                className="items-center justify-center px-8"
-                style={{ width: Platform.OS === "web" ? "100%" : SCREEN_WIDTH }}
-              >
-                <View
-                  className={cn(
-                    "w-full aspect-square max-w-[320px] rounded-3xl overflow-hidden mb-8 shadow-xl shadow-black/20",
-                    step.bgColor,
-                  )}
-                >
-                  <Image
-                    source={step.image}
-                    className="w-full h-full"
-                    resizeMode="contain"
-                  />
-                </View>
-                <Text className="text-3xl font-bold text-foreground text-center mb-4 px-4">
-                  {step.title}
-                </Text>
-                <Text className="text-muted-foreground text-center text-lg leading-7 px-2">
-                  {step.description}
-                </Text>
-              </View>
-            ))}
-          </ScrollView>
+            onViewableItemsChanged={onViewableItemsChanged}
+            viewabilityConfig={viewabilityConfig}
+            bounces={false}
+            decelerationRate="fast"
+            snapToAlignment="center"
+            snapToInterval={containerWidth}
+            contentContainerStyle={{ alignItems: "center" }}
+          />
 
           {/* Pagination dots */}
           <View className="flex-row justify-center gap-2 mt-4">

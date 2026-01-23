@@ -10,12 +10,20 @@ import { Text } from "@/components/ui/text";
 export function LoginScreen() {
   const router = useRouter();
 
+  const handleBack = () => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/theme-selection");
+    }
+  };
+
   return (
     <SafeAreaView className="bg-background" style={{ flex: 1 }}>
       {/* Top Bar with Back Button */}
       <View className="flex-row items-center px-4 h-14">
         <Pressable
-          onPress={() => router.back()}
+          onPress={handleBack}
           className="flex-row items-center gap-1 active:opacity-50"
         >
           <ChevronLeft size={24} color="gray" />

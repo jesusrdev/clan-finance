@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { NAV_THEME } from "@/lib/theme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useUniwind } from "uniwind";
+import { ToastProvider } from "@/components/ui/toast";
 
 export default function RootLayout() {
   const { session, loading } = useAuth();
@@ -35,15 +36,17 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
         <ThemeProvider value={NAV_THEME[theme ?? "light"]}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="(auth)" />
-            <Stack.Screen name="(tabs)" />
-          </Stack>
-          <PortalHost />
+          <ToastProvider>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="(auth)" />
+              <Stack.Screen name="(tabs)" />
+            </Stack>
+            <PortalHost />
+          </ToastProvider>
         </ThemeProvider>
       </SafeAreaProvider>
     </QueryClientProvider>
