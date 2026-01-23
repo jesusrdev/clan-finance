@@ -18,6 +18,10 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 - [ ] Implementar login con Supabase Auth
   - [ ] Crear `LoginScreen.tsx`
   - [ ] Crear `LoginForm.tsx` component
+  - [ ] Integrar Login con Email/Password
+  - [ ] Integrar Login con Google (OAuth)
+    - [ ] Configurar Provider en Supabase Dashboard
+    - [ ] Implementar flujo nativo con `expo-auth-session` o similar
   - [ ] Validación de formulario
   - [ ] Manejo de errores
 - [ ] Implementar registro de usuarios
@@ -41,7 +45,8 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 ### Testing
 
 - [ ] Probar registro de nuevo usuario
-- [ ] Probar login con credenciales correctas
+- [ ] Probar login con credenciales correctas (Email)
+- [ ] Probar login con Google
 - [ ] Probar login con credenciales incorrectas
 - [ ] Probar logout
 - [ ] Verificar redirección de rutas protegidas

@@ -6,6 +6,7 @@ const config = getDefaultConfig(__dirname);
 module.exports = withUniwindConfig(config, {
   cssEntryFile: "./src/global.css",
   dtsFile: "./src/uniwind-types.d.ts",
+  debug: true,
   extraThemes: [
     "onePiece",
     "demonSlayer",

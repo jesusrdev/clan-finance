@@ -43,6 +43,7 @@ const textVariants = cva(
 );
 
 type TextVariantProps = VariantProps<typeof textVariants>;
+
 type TextVariant = NonNullable<TextVariantProps['variant']>;
 
 const ROLE: Partial<Record<TextVariant, Role>> = {
