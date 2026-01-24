@@ -1,5 +1,5 @@
 import "@/global.css";
-import { NAV_THEME } from "@/lib/theme";
+import { NAV_THEME, DARK_THEMES } from "@/lib/theme";
 import { Platform } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import { queryClient } from "@/lib/query/client";
@@ -11,6 +11,7 @@ import { ToastProvider } from "@/components/ui/toast";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useEffect } from "react";
 import { useThemePersistence } from "@/features/auth/hooks/useThemePersistence";
+import { StatusBar } from "expo-status-bar";
 
 export default function RootLayout() {
   const { session, loading } = useAuth();
@@ -50,6 +51,9 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
         <ThemeProvider value={NAV_THEME[theme ?? "light"]}>
+          <StatusBar
+            style={DARK_THEMES.includes(theme ?? "light") ? "light" : "dark"}
+          />
           <ToastProvider>
             <Stack
               screenOptions={{

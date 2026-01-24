@@ -52,6 +52,13 @@ export const THEME_METADATA = {
   },
 };
 
+export const DARK_THEMES = [
+  "dark",
+  "demonSlayer",
+  "dragonBall",
+  "strangerThings",
+];
+
 export const THEME = {
   light: {
     background: "#fdf5e6",
@@ -163,12 +170,7 @@ export const THEME = {
 export const NAV_THEME: Record<string, Theme> = Object.entries(THEME).reduce(
   (acc, [key, val]) => {
     // Definimos qué temas son oscuros basándonos en su fondo
-    const isDark = [
-      "dark",
-      "demonSlayer",
-      "dragonBall",
-      "strangerThings",
-    ].includes(key);
+    const isDark = DARK_THEMES.includes(key);
 
     const baseTheme = isDark ? DarkTheme : DefaultTheme;
     acc[key] = {
