@@ -9,9 +9,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Text } from "@/components/ui/text";
-import { View, Alert } from "react-native";
-import * as React from "react";
 import { supabase } from "@/lib/supabase/client";
+import * as React from "react";
+import { Alert, View } from "react-native";
 
 export function ForgotPasswordForm({ onDismiss }: { onDismiss?: () => void }) {
   const [email, setEmail] = React.useState("");
@@ -26,7 +26,7 @@ export function ForgotPasswordForm({ onDismiss }: { onDismiss?: () => void }) {
     setLoading(true);
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "clanfinance://reset-password",
+        redirectTo: "clan-finance://reset-password",
       });
       if (error) throw error;
 
@@ -44,9 +44,9 @@ export function ForgotPasswordForm({ onDismiss }: { onDismiss?: () => void }) {
 
   return (
     <View className="gap-6">
-      <Card className="border-border/0 shadow-none">
+      <Card className="shadow-none border-border/0">
         <CardHeader>
-          <CardTitle className="text-center text-xl sm:text-left font-bold">
+          <CardTitle className="text-xl font-bold text-center sm:text-left">
             ¿Olvidaste tu contraseña?
           </CardTitle>
           <CardDescription className="text-center sm:text-left">
@@ -70,7 +70,7 @@ export function ForgotPasswordForm({ onDismiss }: { onDismiss?: () => void }) {
               />
             </View>
             <Button className="w-full" onPress={onSubmit} disabled={loading}>
-              <Text className="text-primary-foreground font-bold">
+              <Text className="font-bold text-primary-foreground">
                 {loading ? "Enviando..." : "Restablecer contraseña"}
               </Text>
             </Button>

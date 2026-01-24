@@ -69,7 +69,33 @@ export function useAuth() {
       );
 
       if (result.type === "success") {
-        // El callback se manejará automáticamente
+        const { url } = result;
+
+        // El hash (#) se usa para tokens implícitos, el query (?) para códigos PKCE
+        const baseUrl = url.includes("#")
+          ? url.split("#")[1]
+          : url.split("?")[1];
+        const params = new URLSearchParams(baseUrl);
+
+        const access_token = params.get("access_token");
+        const refresh_token = params.get("refresh_token");
+        const code = params.get("code");
+
+        if (access_token && refresh_token) {
+          const { data: sessionData, error: sessionError } =
+            await supabase.auth.setSession({
+              access_token,
+              refresh_token,
+            });
+          if (sessionError) throw sessionError;
+          return sessionData;
+        } else if (code) {
+          const { data: sessionData, error: sessionError } =
+            await supabase.auth.exchangeCodeForSession(code);
+          if (sessionError) throw sessionError;
+          return sessionData;
+        }
+
         return data;
       } else {
         throw new Error("Autenticación cancelada");

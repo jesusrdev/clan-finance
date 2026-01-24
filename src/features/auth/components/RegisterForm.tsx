@@ -139,7 +139,7 @@ export function RegisterForm() {
           </CardDescription>
         </CardHeader>
         <CardContent className="gap-6">
-          <View className="gap-6">
+          <View className="gap-4">
             {/* Full Name */}
             <View className="gap-1.5">
               <Label htmlFor="fullname">Nombre Completo</Label>

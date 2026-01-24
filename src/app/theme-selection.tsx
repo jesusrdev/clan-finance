@@ -65,11 +65,11 @@ export default function ThemeSelectionScreen() {
                   <Text className="text-3xl">{metadata.icon}</Text>
                 </View>
 
-                <View className="flex-1 ml-5">
-                  <View className="flex-row gap-2 items-center">
+                <View className="flex-1 ml-4 sm:ml-5">
+                  <View className="flex-row flex-wrap gap-2 items-center">
                     <Text
                       className={cn(
-                        "text-xl font-bold",
+                        "text-lg sm:text-xl font-bold",
                         theme === key ? "text-primary" : "text-foreground",
                       )}
                     >

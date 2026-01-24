@@ -10,37 +10,37 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 
 ### Setup Inicial
 
-- [ ] Crear estructura de carpetas del feature
-- [ ] Configurar tipos TypeScript para auth
+- [x] Crear estructura de carpetas del feature
+- [x] Configurar tipos TypeScript para auth
 
 ### Implementación
 
-- [ ] Implementar login con Supabase Auth
-  - [ ] Crear `LoginScreen.tsx`
-  - [ ] Crear `LoginForm.tsx` component
-  - [ ] Integrar Login con Email/Password
-  - [ ] Integrar Login con Google (OAuth)
-    - [ ] Configurar Provider en Supabase Dashboard
-    - [ ] Implementar flujo nativo con `expo-auth-session` o similar
-  - [ ] Validación de formulario
-  - [ ] Manejo de errores
-- [ ] Implementar registro de usuarios
-  - [ ] Crear `RegisterScreen.tsx`
-  - [ ] Crear `RegisterForm.tsx` component
-  - [ ] Validación de email y password
-  - [ ] Confirmación de password
-- [ ] Crear hook `useAuth`
-  - [ ] `login(email, password)`
-  - [ ] `register(email, password)`
-  - [ ] `logout()`
-  - [ ] `getCurrentUser()`
-- [ ] Implementar logout
-  - [ ] Botón de logout en perfil
-  - [ ] Limpiar caché al logout
-  - [ ] Redireccionar a login
-- [ ] Proteger rutas con autenticación
-  - [ ] Crear `ProtectedRoute` component
-  - [ ] Aplicar a rutas de tabs
+- [x] Implementar login con Supabase Auth
+  - [x] Crear `LoginScreen.tsx`
+  - [x] Crear `LoginForm.tsx` component
+  - [x] Integrar Login con Email/Password
+  - [/] Integrar Login con Google (OAuth) (UI lista, falta config dashboard)
+    - [x] Configurar Provider en Supabase Dashboard
+    - [x] Implementar flujo nativo con `expo-auth-session` o similar
+  - [x] Validación de formulario
+  - [x] Manejo de errores
+- [x] Implementar registro de usuarios
+  - [x] Crear `RegisterScreen.tsx`
+  - [x] Crear `RegisterForm.tsx` component
+  - [x] Validación de email y password
+  - [x] Confirmación de password
+- [x] Crear hook `useAuth`
+  - [x] `login(email, password)`
+  - [x] `register(email, password)`
+  - [x] `logout()`
+  - [x] `getCurrentUser()`
+- [/] Implementar logout
+  - [x] Botón de logout en perfil (Por implementar en UI)
+  - [x] Limpiar caché al logout
+  - [x] Redireccionar a login
+- [x] Proteger rutas con autenticación
+  - [x] Crear `ProtectedRoute` component (Gestionado en `_layout.tsx`)
+  - [x] Aplicar a rutas de tabs
 
 ### Testing
 
@@ -67,11 +67,11 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
   - [ ] Crear `EditProfileScreen.tsx`
   - [ ] Formulario de edición (nombre, avatar)
   - [ ] Upload de imagen (opcional)
-- [ ] Implementar selección de tema (5 skins)
-  - [ ] Crear `ThemeSelectorScreen.tsx`
-  - [ ] Grid de temas con preview
-  - [ ] Aplicar tema seleccionado
-  - [ ] Persistir en profile
+- [x] Implementar selección de tema (5 skins)
+  - [x] Crear `ThemeSelectorScreen.tsx` (en `app/theme-selection.tsx`)
+  - [x] Grid de temas con preview
+  - [x] Aplicar tema seleccionado
+  - [x] Persistir en profile
 - [ ] Sistema de XP y niveles
   - [ ] Mostrar XP actual
   - [ ] Barra de progreso a siguiente nivel

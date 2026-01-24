@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ChevronLeft } from "lucide-react-native";
 import { useRouter } from "expo-router";
@@ -20,20 +20,34 @@ export function LoginScreen() {
 
   return (
     <SafeAreaView className="bg-background" style={{ flex: 1 }}>
-      {/* Top Bar with Back Button */}
-      <View className="flex-row items-center px-4 pt-5">
+      {/* Top Bar with Back Button - Static at top */}
+      <View className="z-10 flex-row items-center px-4 pt-5 pb-2 bg-background">
         <Pressable
           onPress={handleBack}
-          className="flex-row items-center gap-1 active:opacity-50"
+          className="flex-row gap-1 items-center active:opacity-50"
         >
           <ChevronLeft size={24} color="gray" />
-          <Text className="text-muted-foreground font-medium">Volver</Text>
+          <Text className="font-medium text-muted-foreground">Volver</Text>
         </Pressable>
       </View>
 
-      <View className="flex-1 items-center justify-center px-4">
-        <LoginForm />
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "center",
+            paddingHorizontal: 16,
+          }}
+        >
+          <View className="justify-center items-center py-6">
+            <LoginForm />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

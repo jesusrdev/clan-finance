@@ -91,7 +91,7 @@ export function LoginForm() {
           </CardDescription>
         </CardHeader>
         <CardContent className="gap-6">
-          <View className="gap-6">
+          <View className="gap-4">
             <View className="gap-1.5">
               <Label htmlFor="email">Correo Electrónico</Label>
               <Input
@@ -107,32 +107,7 @@ export function LoginForm() {
               />
             </View>
             <View className="gap-1.5">
-              <View className="flex-row justify-between items-center">
-                <Label htmlFor="password">Contraseña</Label>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="link"
-                      size="sm"
-                      className="px-1 py-0 ml-auto h-4 web:h-fit sm:h-4"
-                    >
-                      <Text className="text-xs font-normal leading-4">
-                        ¿Olvidaste tu contraseña?
-                      </Text>
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                      <DialogTitle>Recuperar Contraseña</DialogTitle>
-                      <DialogDescription>
-                        Ingresa tu correo para recibir las instrucciones de
-                        recuperación.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <ForgotPasswordForm />
-                  </DialogContent>
-                </Dialog>
-              </View>
+              <Label htmlFor="password">Contraseña</Label>
               <Input
                 ref={passwordInputRef}
                 id="password"
@@ -143,6 +118,32 @@ export function LoginForm() {
                 returnKeyType="send"
                 onSubmitEditing={onSubmit}
               />
+            </View>
+
+            <View className="flex-row justify-end">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="px-1 py-0 h-4 web:h-fit sm:h-4"
+                  >
+                    <Text className="text-xs font-normal leading-4 text-muted-foreground/80">
+                      ¿Olvidaste tu contraseña?
+                    </Text>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Recuperar Contraseña</DialogTitle>
+                    <DialogDescription>
+                      Ingresa tu correo para recibir las instrucciones de
+                      recuperación.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <ForgotPasswordForm onDismiss={() => {}} />
+                </DialogContent>
+              </Dialog>
             </View>
             <Button
               className="w-full rounded-2xl border-b-0 shadow-lg shadow-primary/20 border-primary/30 active:border-b-0 active:translate-y-1"
