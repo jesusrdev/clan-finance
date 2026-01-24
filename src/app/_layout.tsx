@@ -20,12 +20,16 @@ export default function RootLayout() {
 
   const { theme, isReady } = useThemePersistence();
 
+  // Redirección inicial solo si no estamos en ninguna ruta (arranque en frío)
   useEffect(() => {
-    if (loading) return;
-    if (Platform.OS != "web") {
+    if (loading || !isReady) return;
+
+    // Si no hay ruta (root) y no estamos logueados, ir a "/"
+    // Si estamos logueados, el segundo efecto nos llevará a /(tabs)
+    if (!segments[0] && !session && Platform.OS !== "web") {
       router.replace("/");
     }
-  }, [loading]);
+  }, [loading, isReady, session]);
 
   useEffect(() => {
     if (loading) return;
@@ -35,12 +39,12 @@ export default function RootLayout() {
     // const atRoot = segments.length === 0 || (!inAuthGroup && !inTabsGroup);
 
     if (session) {
-      // Usuario autenticado: siempre ir a tabs
-      if (!inTabsGroup) {
+      // Si está autenticado y trata de entrar a login/register o welcome, mandarlo a tabs
+      if (inAuthGroup || !segments[0]) {
         router.replace("/(tabs)");
       }
     } else {
-      // Usuario NO autenticado: ir a welcome si está en tabs
+      // Si NO está autenticado y trata de entrar a las pestañas, mandarlo a welcome
       if (inTabsGroup) {
         router.replace("/");
       }

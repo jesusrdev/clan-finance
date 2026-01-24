@@ -40,7 +40,7 @@ export function ThemeSelector() {
             >
               <View
                 style={{ backgroundColor: anime.color }}
-                className="size-12 rounded-full border border-border shadow-sm"
+                className="rounded-full border shadow-sm size-12 border-border"
               />
               <Text
                 className={cn(
