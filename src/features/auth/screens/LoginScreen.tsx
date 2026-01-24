@@ -21,7 +21,7 @@ export function LoginScreen() {
   return (
     <SafeAreaView className="bg-background" style={{ flex: 1 }}>
       {/* Top Bar with Back Button */}
-      <View className="flex-row items-center px-4 h-14">
+      <View className="flex-row items-center px-4 pt-5">
         <Pressable
           onPress={handleBack}
           className="flex-row items-center gap-1 active:opacity-50"

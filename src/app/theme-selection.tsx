@@ -1,24 +1,24 @@
-import { View, Pressable, ScrollView, Animated, Platform } from "react-native";
-import { Text } from "@/components/ui/text";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "expo-router";
-import { useUniwind, Uniwind } from "uniwind";
+import { Text } from "@/components/ui/text";
+import { useThemePersistence } from "@/features/auth/hooks/useThemePersistence";
 import { THEME_METADATA } from "@/lib/theme";
 import { cn } from "@/lib/utils";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 import { ChevronRight, Sparkles } from "lucide-react-native";
 import * as React from "react";
+import { Pressable, ScrollView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ThemeSelectionScreen() {
   const router = useRouter();
-  const { theme } = useUniwind();
+  const { theme, updateTheme } = useThemePersistence();
 
   return (
     <SafeAreaView className="bg-background" style={{ flex: 1 }}>
-      <View className="flex-1 w-full max-w-2xl mx-auto px-6 py-6">
+      <View className="flex-1 px-6 py-6 mx-auto w-full max-w-2xl">
         {/* Header */}
         <View className="mb-6">
-          <View className="flex-row items-center gap-2 mb-1">
+          <View className="flex-row gap-2 items-center mb-1">
             <Text className="text-3xl font-bold text-foreground">
               Elige tu Skin
             </Text>
@@ -30,7 +30,7 @@ export default function ThemeSelectionScreen() {
               }
             />
           </View>
-          <Text className="text-muted-foreground text-base font-medium">
+          <Text className="text-base font-medium text-muted-foreground">
             ¡Personaliza tu aventura con objetos legendarios!
           </Text>
         </View>
@@ -49,7 +49,7 @@ export default function ThemeSelectionScreen() {
             {Object.entries(THEME_METADATA).map(([key, metadata]) => (
               <Pressable
                 key={key}
-                onPress={() => Uniwind.setTheme(key as any)}
+                onPress={() => updateTheme(key)}
                 className={cn(
                   "flex-row items-center p-5 rounded-3xl border-2 transition-all duration-300",
                   theme === key
@@ -60,13 +60,13 @@ export default function ThemeSelectionScreen() {
                 {/* Visual Icon Box */}
                 <View
                   style={{ backgroundColor: metadata.color }}
-                  className="size-16 rounded-2xl items-center justify-center shadow-md border-2 border-white/30"
+                  className="justify-center items-center rounded-2xl border-2 shadow-md size-16 border-white/30"
                 >
                   <Text className="text-3xl">{metadata.icon}</Text>
                 </View>
 
                 <View className="flex-1 ml-5">
-                  <View className="flex-row items-center gap-2">
+                  <View className="flex-row gap-2 items-center">
                     <Text
                       className={cn(
                         "text-xl font-bold",
@@ -89,7 +89,7 @@ export default function ThemeSelectionScreen() {
 
                   {/* Item indicator */}
                   <View className="flex-row items-center mt-2 opacity-70">
-                    <Text className="text-xs font-bold text-foreground/60 mr-1">
+                    <Text className="mr-1 text-xs font-bold text-foreground/60">
                       ITEM:
                     </Text>
                     <Text className="text-xs font-bold text-primary">
@@ -119,10 +119,10 @@ export default function ThemeSelectionScreen() {
         <View className="pt-6">
           <Button
             size="lg"
-            className="w-full h-16 rounded-2xl shadow-xl shadow-primary/20 border-b-4 border-primary/40 active:border-b-0 active:translate-y-1"
+            className="w-full rounded-2xl border-b-0 shadow-xl shadow-primary/20 border-primary/40 active:border-b-0 active:translate-y-1"
             onPress={() => router.push("/login")}
           >
-            <Text className="font-bold text-xl text-primary-foreground tracking-wide">
+            <Text className="text-xl font-bold tracking-wide text-primary-foreground">
               Confirmar Estilo
             </Text>
           </Button>

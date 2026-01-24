@@ -1,28 +1,29 @@
-import { useAuth } from "@/features/auth/hooks/useAuth";
 import "@/global.css";
-import { queryClient } from "@/lib/query/client";
-import { ThemeProvider } from "@react-navigation/native";
-import { PortalHost } from "@rn-primitives/portal";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Stack, useRouter, useSegments } from "expo-router";
-import { useEffect } from "react";
-
 import { NAV_THEME } from "@/lib/theme";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useUniwind } from "uniwind";
-import { ToastProvider } from "@/components/ui/toast";
 import { Platform } from "react-native";
+import { PortalHost } from "@rn-primitives/portal";
+import { queryClient } from "@/lib/query/client";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Stack, useRouter, useSegments } from "expo-router";
+import { ThemeProvider } from "@react-navigation/native";
+import { ToastProvider } from "@/components/ui/toast";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useEffect } from "react";
+import { useThemePersistence } from "@/features/auth/hooks/useThemePersistence";
 
 export default function RootLayout() {
   const { session, loading } = useAuth();
   const segments = useSegments();
   const router = useRouter();
 
-  const { theme } = useUniwind();
+  const { theme, isReady } = useThemePersistence();
 
   useEffect(() => {
     if (loading) return;
-    router.replace("/");
+    if (Platform.OS != "web") {
+      router.replace("/");
+    }
   }, [loading]);
 
   useEffect(() => {

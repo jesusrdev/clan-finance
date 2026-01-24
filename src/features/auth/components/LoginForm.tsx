@@ -75,18 +75,18 @@ export function LoginForm() {
 
   return (
     <View className="gap-6 w-full max-w-md">
-      <Card className="border-border/0 sm:border-border shadow-none sm:shadow-lg sm:shadow-black/5 rounded-3xl">
-        <CardHeader className="items-center sm:items-start pt-8">
+      <Card className="rounded-3xl shadow-none border-border/0 sm:border-border sm:shadow-lg sm:shadow-black/5">
+        <CardHeader className="items-center pt-8 sm:items-start">
           <View
             style={{ backgroundColor: metadata?.color }}
-            className="size-16 rounded-2xl items-center justify-center mb-4 shadow-md border-2 border-white/20"
+            className="justify-center items-center mb-4 rounded-2xl border-2 shadow-md size-16 border-white/20"
           >
             <Text className="text-3xl">{metadata?.icon || "🎮"}</Text>
           </View>
-          <CardTitle className="text-center sm:text-left text-2xl font-bold">
+          <CardTitle className="text-2xl font-bold text-center sm:text-left">
             Bienvenido de nuevo
           </CardTitle>
-          <CardDescription className="text-center sm:text-left text-base">
+          <CardDescription className="text-base text-center sm:text-left">
             ¡Prepárate para tu próxima misión! Ingresa tus credenciales.
           </CardDescription>
         </CardHeader>
@@ -107,16 +107,16 @@ export function LoginForm() {
               />
             </View>
             <View className="gap-1.5">
-              <View className="flex-row items-center justify-between">
+              <View className="flex-row justify-between items-center">
                 <Label htmlFor="password">Contraseña</Label>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
                       variant="link"
                       size="sm"
-                      className="web:h-fit ml-auto h-4 px-1 py-0 sm:h-4"
+                      className="px-1 py-0 ml-auto h-4 web:h-fit sm:h-4"
                     >
-                      <Text className="font-normal leading-4 text-xs">
+                      <Text className="text-xs font-normal leading-4">
                         ¿Olvidaste tu contraseña?
                       </Text>
                     </Button>
@@ -145,17 +145,17 @@ export function LoginForm() {
               />
             </View>
             <Button
-              className="w-full h-14 rounded-2xl shadow-lg shadow-primary/20 border-b-4 border-primary/30 active:border-b-0 active:translate-y-1"
+              className="w-full rounded-2xl border-b-0 shadow-lg shadow-primary/20 border-primary/30 active:border-b-0 active:translate-y-1"
               onPress={onSubmit}
               disabled={loading}
             >
-              <Text className="text-primary-foreground font-bold text-lg">
+              <Text className="font-bold text-primary-foreground">
                 {loading ? "Iniciando sesión..." : "¡VAMOS!"}
               </Text>
             </Button>
           </View>
-          <View className="flex-row items-center justify-center pt-2">
-            <Text className="text-base text-muted-foreground font-medium">
+          <View className="flex-row justify-center items-center pt-2">
+            <Text className="text-base font-medium text-muted-foreground">
               ¿Eres nuevo aquí?{" "}
             </Text>
             <Pressable onPress={() => router.replace("/register")}>
@@ -166,7 +166,7 @@ export function LoginForm() {
           </View>
           <View className="flex-row items-center">
             <Separator className="flex-1" />
-            <Text className="text-muted-foreground px-4 text-sm">
+            <Text className="px-4 text-sm text-muted-foreground">
               o continúa con
             </Text>
             <Separator className="flex-1" />

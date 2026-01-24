@@ -87,18 +87,18 @@ export function RegisterForm() {
   if (success) {
     return (
       <View className="gap-6 w-full max-w-md">
-        <Card className="border-border/0 sm:border-border shadow-none sm:shadow-lg sm:shadow-black/5 rounded-3xl">
+        <Card className="rounded-3xl shadow-none border-border/0 sm:border-border sm:shadow-lg sm:shadow-black/5">
           <CardHeader className="items-center pt-8">
             <View
               style={{ backgroundColor: metadata?.color }}
-              className="size-20 rounded-3xl items-center justify-center mb-6 shadow-xl border-2 border-white/20"
+              className="justify-center items-center mb-6 rounded-3xl border-2 shadow-xl size-20 border-white/20"
             >
               <Text className="text-5xl">📩</Text>
             </View>
-            <CardTitle className="text-center text-3xl font-bold">
+            <CardTitle className="text-3xl font-bold text-center">
               ¡Misión Lanzada!
             </CardTitle>
-            <CardDescription className="text-center text-base px-2 pt-2">
+            <CardDescription className="px-2 pt-2 text-base text-center">
               Hemos enviado un pergamino de confirmación a{" "}
               <Text className="font-bold text-primary">{email}</Text>.
             </CardDescription>
@@ -108,10 +108,10 @@ export function RegisterForm() {
               Revísalo para activar tu cuenta y comenzar tu aventura financiera.
             </Text>
             <Button
-              className="w-full h-14 rounded-2xl"
+              className="w-full rounded-2xl"
               onPress={() => router.push("/login")}
             >
-              <Text className="text-primary-foreground font-bold text-lg">
+              <Text className="text-lg font-bold text-primary-foreground">
                 Ir al Inicio de Sesión
               </Text>
             </Button>
@@ -123,18 +123,18 @@ export function RegisterForm() {
 
   return (
     <View className="gap-6 w-full max-w-md">
-      <Card className="border-border/0 sm:border-border shadow-none sm:shadow-lg sm:shadow-black/5 rounded-3xl">
-        <CardHeader className="items-center sm:items-start pt-8">
+      <Card className="rounded-3xl shadow-none border-border/0 sm:border-border sm:shadow-lg sm:shadow-black/5">
+        <CardHeader className="items-center pt-8 sm:items-start">
           <View
             style={{ backgroundColor: metadata?.color }}
-            className="size-16 rounded-2xl items-center justify-center mb-4 shadow-md border-2 border-white/20"
+            className="justify-center items-center mb-4 rounded-2xl border-2 shadow-md size-16 border-white/20"
           >
             <Text className="text-3xl">{metadata?.icon || "⚔️"}</Text>
           </View>
-          <CardTitle className="text-center sm:text-left text-2xl font-bold">
+          <CardTitle className="text-2xl font-bold text-center sm:text-left">
             Crea tu cuenta
           </CardTitle>
-          <CardDescription className="text-center sm:text-left text-base">
+          <CardDescription className="text-base text-center sm:text-left">
             ¡Tu aventura financiera comienza aquí! Únete a un Clan.
           </CardDescription>
         </CardHeader>
@@ -203,17 +203,17 @@ export function RegisterForm() {
             </View>
 
             <Button
-              className="w-full h-14 rounded-2xl shadow-lg shadow-primary/20 border-b-4 border-primary/30 active:border-b-0 active:translate-y-1"
+              className="w-full rounded-2xl border-b-0 shadow-lg shadow-primary/20 border-primary/30 active:border-b-0 active:translate-y-1"
               onPress={onSubmit}
               disabled={loading}
             >
-              <Text className="text-primary-foreground font-bold text-lg">
+              <Text className="font-bold text-primary-foreground">
                 {loading ? "Creando cuenta..." : "¡UNIRSE AL CLAN!"}
               </Text>
             </Button>
           </View>
-          <View className="flex-row items-center justify-center pt-2">
-            <Text className="text-base text-muted-foreground font-medium">
+          <View className="flex-row justify-center items-center pt-2">
+            <Text className="text-base font-medium text-muted-foreground">
               ¿Ya tienes una cuenta?{" "}
             </Text>
             <Pressable onPress={() => router.replace("/login")}>
@@ -225,7 +225,7 @@ export function RegisterForm() {
 
           <View className="flex-row items-center">
             <Separator className="flex-1" />
-            <Text className="text-muted-foreground px-4 text-sm">
+            <Text className="px-4 text-sm text-muted-foreground">
               o regístrate con
             </Text>
             <Separator className="flex-1" />
