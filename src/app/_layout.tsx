@@ -12,6 +12,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useEffect } from "react";
 import { useThemePersistence } from "@/features/auth/hooks/useThemePersistence";
 import { StatusBar } from "expo-status-bar";
+import { supabase } from "@/lib/supabase/client";
 
 export default function RootLayout() {
   const { session, loading } = useAuth();
@@ -36,20 +37,46 @@ export default function RootLayout() {
 
     const inAuthGroup = segments[0] === "(auth)";
     const inTabsGroup = segments[0] === "(tabs)";
-    // const atRoot = segments.length === 0 || (!inAuthGroup && !inTabsGroup);
 
-    if (session) {
-      // Si está autenticado y trata de entrar a login/register o welcome, mandarlo a tabs
-      if (inAuthGroup || !segments[0]) {
-        router.replace("/(tabs)");
+    const verifyAndRoute = async () => {
+      const {
+        data: { session: currentSession },
+      } = await supabase.auth.getSession();
+
+      if (currentSession) {
+        // Si está autenticado y trata de entrar a login/register o welcome, mandarlo a tabs
+        if (inAuthGroup || !segments[0]) {
+          router.replace("/(tabs)");
+        }
+      } else {
+        // Si NO está autenticado y trata de entrar a las pestañas, mandarlo a welcome
+        if (inTabsGroup) {
+          router.replace("/");
+        }
       }
-    } else {
-      // Si NO está autenticado y trata de entrar a las pestañas, mandarlo a welcome
-      if (inTabsGroup) {
+    };
+
+    verifyAndRoute();
+  }, [session, loading, segments]);
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      const inAuthGroup = segments[0] === "(auth)";
+      const inTabsGroup = segments[0] === "(tabs)";
+
+      if (nextSession) {
+        if (inAuthGroup || !segments[0]) {
+          router.replace("/(tabs)");
+        }
+      } else if (inTabsGroup) {
         router.replace("/");
       }
-    }
-  }, [session, loading, segments]);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router, segments]);
 
   return (
     <QueryClientProvider client={queryClient}>

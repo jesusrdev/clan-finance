@@ -12,7 +12,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
-// Custom storage handler to avoid "window is not defined" during SSR
+// Custom storage handlers to avoid "window is not defined" during SSR
 const isServer = typeof window === "undefined";
 
 const NoopStorage = {
@@ -21,9 +21,27 @@ const NoopStorage = {
   removeItem: (key: string) => Promise.resolve(),
 };
 
+const WebStorage = {
+  getItem: (key: string) => Promise.resolve(window.localStorage.getItem(key)),
+  setItem: (key: string, value: string) => {
+    window.localStorage.setItem(key, value);
+    return Promise.resolve();
+  },
+  removeItem: (key: string) => {
+    window.localStorage.removeItem(key);
+    return Promise.resolve();
+  },
+};
+
+const authStorage = isServer
+  ? NoopStorage
+  : Platform.OS === "web"
+    ? WebStorage
+    : AsyncStorage;
+
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage: isServer ? NoopStorage : AsyncStorage,
+    storage: authStorage,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true, // CRÍTICO: Permite detectar tokens OAuth en la URL

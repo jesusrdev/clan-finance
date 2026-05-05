@@ -104,8 +104,15 @@ export function useAuth() {
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    const { error } = await supabase.auth.signOut({ scope: "local" });
+    if (error) {
+      console.error("Error al cerrar sesión:", error.message);
+      throw error;
+    }
+
+    // Actualización optimista local para evitar estados colgados en UI.
+    setSession(null);
+    setUser(null);
   };
 
   const signIn = async (email: string, password: string) => {
