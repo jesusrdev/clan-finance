@@ -8,6 +8,7 @@ Aplicación móvil de finanzas familiares gamificada donde las tareas del hogar 
 
 | Documento                                             | Descripción                                     |
 | ----------------------------------------------------- | ----------------------------------------------- |
+| **[Estado Actual](docs/CURRENT-STATUS.md)**           | Estado real del producto y validación reciente  |
 | **[Guía de Inicio](docs/INICIO.md)**                  | Instalación, configuración y primeros pasos     |
 | **[Casos de Uso](docs/CASOS-DE-USO.md)**              | 43 casos de uso atómicos con matriz de permisos |
 | **[Guía de Desarrollo](docs/DESARROLLO.md)**          | Roadmap de desarrollo con checkboxes por fase   |
@@ -72,7 +73,15 @@ Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 | **Dragon Ball**     | Naranja/Azul   | Colores saturados |
 | **Stranger Things** | Rojo/Negro     | Neón años 80      |
 
-## 📱 Funcionalidades Principales
+## 📱 Estado Actual (resumen rápido)
+
+- ✅ **Profile** es hoy el módulo más desarrollado (perfil, stats visuales, avatar por emoji, selección/persistencia de skin, logout desde perfil).
+- 🟡 **Auth** está operativo para flujo base de login/registro/logout.
+- 🚧 **Quests**, **Wallet** y **Clan** siguen en estado placeholder/pending (sin implementación funcional completa).
+
+> Nota: Para detalle puntual y sin ruido de roadmap, ver [`docs/CURRENT-STATUS.md`](docs/CURRENT-STATUS.md).
+
+## 📱 Funcionalidades Principales (visión objetivo)
 
 ### Para Administradores (Padres)
 
@@ -195,7 +204,7 @@ Este proyecto es privado y propietario.
 
 **Versión:** 1.1  
 **Estado:** En desarrollo 🚧  
-**Última actualización:** Enero 2026
+**Última actualización:** Mayo 2026
 
 ---
 

@@ -1,5 +1,16 @@
 # Guía de Desarrollo - Clan Finance
 
+> Estado real actualizado: ver [CURRENT-STATUS.md](CURRENT-STATUS.md) para una foto fiel del código hoy.
+
+## ⚠️ Estado real vs roadmap
+
+Este documento mantiene el **roadmap objetivo**. El estado real implementado actualmente es:
+
+- ✅ **Profile**: módulo más desarrollado actualmente.
+- 🚧 **Quests / Wallet / Clan**: todavía en placeholder o pendiente de implementación funcional.
+
+Tomá esta guía como plan de ejecución, no como evidencia de completitud actual.
+
 ## 📋 Orden de Implementación Recomendado
 
 Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada item como completado a medida que avanzas.
