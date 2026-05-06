@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { useWindowDimensions } from "react-native";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { Swords, Target, Wallet } from "lucide-react-native";
@@ -43,9 +44,12 @@ export function StatsGrid({
   balance = 0,
   clanName = "Sin Clan",
 }: StatsGridProps) {
+  const { width } = useWindowDimensions();
+  const isSmallScreen = width < 430;
+
   return (
-    <View className="flex-row flex-wrap gap-4 px-1">
-      <View className="flex-1 min-w-[100px]">
+    <View className="gap-4 px-1" style={{ flexDirection: isSmallScreen ? "column" : "row" }}>
+      <View style={{ flex: 1 }}>
         <StatItem
           label="Clan"
           value={clanName}
@@ -53,7 +57,7 @@ export function StatsGrid({
           icon={<Target size={20} color="#3b82f6" />}
         />
       </View>
-      <View className="flex-1 min-w-[100px]">
+      <View style={{ flex: 1 }}>
         <StatItem
           label="Misiones"
           value={completedTasks}
@@ -61,7 +65,7 @@ export function StatsGrid({
           icon={<Swords size={20} color="#f97316" />}
         />
       </View>
-      <View className="flex-1 min-w-[100px]">
+      <View style={{ flex: 1 }}>
         <StatItem
           label="Balance"
           value={`$${balance}`}

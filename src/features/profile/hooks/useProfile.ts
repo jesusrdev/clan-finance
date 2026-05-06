@@ -40,12 +40,30 @@ export function useProfile() {
     },
   });
 
+  const refreshProfile = async () => {
+    await Promise.all([
+      profileQuery.refetch(),
+      statsQuery.refetch(),
+      monthlyMetricsQuery.refetch(),
+    ]);
+  };
+
+  const isInitialLoading = profileQuery.isLoading && !profileQuery.data;
+  const isRefreshing =
+    !isInitialLoading &&
+    (profileQuery.isFetching || statsQuery.isFetching || monthlyMetricsQuery.isFetching);
+
+  const hardError = profileQuery.error || (!profileQuery.data ? statsQuery.error || monthlyMetricsQuery.error : null);
+
   return {
     profile: profileQuery.data,
     stats: statsQuery.data,
     monthlyMetrics: monthlyMetricsQuery.data,
     isLoading: profileQuery.isLoading || statsQuery.isLoading || monthlyMetricsQuery.isLoading,
-    error: profileQuery.error || statsQuery.error || monthlyMetricsQuery.error,
+    isInitialLoading,
+    isRefreshing,
+    error: hardError,
+    refreshProfile,
     updateProfile: updateProfileMutation.mutateAsync,
     isUpdating: updateProfileMutation.isPending,
   };
