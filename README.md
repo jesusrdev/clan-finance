@@ -166,15 +166,31 @@ clan-finance/
 
 Ver [Documentación de Seguridad](docs/database/SEGURIDAD-RLS.md) para detalles.
 
-## 🧪 Testing (Futuro)
+## 🧪 Testing y Quality Gates
 
 ```bash
-# Unit tests
-npm test
+# Type checking
+npm run typecheck
 
-# E2E tests
-npm run test:e2e
+# Unit/integration tests
+npm run test
+
+# Coverage (baseline inicial)
+npm run coverage
 ```
+
+### CI Quality Gates (PR)
+
+- Workflow: `.github/workflows/ci-quality.yml`
+- Gates requeridos en PR: `typecheck`, `test`, `coverage`
+- Baseline inicial de coverage: **20%** (lines/statements/functions/branches)
+- Ratchet plan: subir baseline progresivamente en cambios futuros según crecimiento de suites
+
+### Node version source of truth
+
+- Fuente de verdad: `.nvmrc`
+- CI usa `actions/setup-node` con `node-version-file: .nvmrc`
+- `package.json` también declara `engines.node` para paridad local/CI
 
 ## 📦 Scripts Disponibles
 
@@ -183,6 +199,9 @@ npm start              # Iniciar Expo Dev Server
 npm run android        # Abrir en Android
 npm run ios            # Abrir en iOS
 npm run web            # Abrir en navegador
+npm run typecheck      # Verificación TypeScript
+npm run test           # Ejecutar tests con Vitest
+npm run coverage       # Ejecutar tests con coverage
 npx expo start -c      # Limpiar caché
 ```
 

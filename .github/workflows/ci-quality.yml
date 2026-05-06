@@ -1,0 +1,38 @@
+name: CI Quality
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  quality-gates:
+    name: Typecheck, tests, and coverage gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm run test
+
+      - name: Coverage
+        run: npm run coverage
+
+      - name: Enforce baseline coverage and print measured vs required
+        env:
+          COVERAGE_MINIMUM: "20"
+        run: |
+          node -e "const fs=require('node:fs'); const p='coverage/coverage-summary.json'; if(!fs.existsSync(p)){console.error('Coverage summary not found at '+p); process.exit(1);} const s=JSON.parse(fs.readFileSync(p,'utf8')).total; const required=Number(process.env.COVERAGE_MINIMUM||0); const keys=['lines','statements','functions','branches']; const rows=keys.map((k)=>({metric:k, measured:Number(s[k]?.pct ?? 0), required})); console.log('Coverage baseline check (measured vs required):'); for (const r of rows){ console.log('- '+r.metric+': measured='+r.measured.toFixed(2)+'%, required='+r.required.toFixed(2)+'%'); } const failed=rows.filter((r)=>r.measured<r.required); if(failed.length){ console.error('Coverage gate failed: one or more metrics are below required baseline.'); process.exit(1);} "
