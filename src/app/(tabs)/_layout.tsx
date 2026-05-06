@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import { useThemePersistence } from "@/features/auth/hooks/useThemePersistence";
 import { THEME_METADATA } from "@/lib/theme";
+import { House, ScrollText, Wallet, UserRound } from "lucide-react-native";
 
 export default function TabsLayout() {
   const { theme } = useThemePersistence();
@@ -26,6 +27,7 @@ export default function TabsLayout() {
         options={{
           title: "Inicio",
           tabBarLabel: "Inicio",
+          tabBarIcon: ({ color, size }) => <House color={color} size={size} />,
         }}
       />
       <Tabs.Screen
@@ -33,6 +35,7 @@ export default function TabsLayout() {
         options={{
           title: "Quests",
           tabBarLabel: "Quests",
+          tabBarIcon: ({ color, size }) => <ScrollText color={color} size={size} />,
         }}
       />
       <Tabs.Screen
@@ -40,6 +43,7 @@ export default function TabsLayout() {
         options={{
           title: "Wallet",
           tabBarLabel: "Wallet",
+          tabBarIcon: ({ color, size }) => <Wallet color={color} size={size} />,
         }}
       />
       <Tabs.Screen
@@ -47,6 +51,7 @@ export default function TabsLayout() {
         options={{
           title: "Perfil",
           tabBarLabel: "Perfil",
+          tabBarIcon: ({ color, size }) => <UserRound color={color} size={size} />,
         }}
       />
     </Tabs>
