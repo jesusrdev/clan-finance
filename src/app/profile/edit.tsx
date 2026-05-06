@@ -39,7 +39,7 @@ export default function ProfileEditScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background" edges={["top"]}>
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }} edges={["top"]}>
       <View className="flex-1 px-6 py-6 mx-auto w-full max-w-2xl">
         <Text className="text-3xl font-black text-foreground">Editar identidad</Text>
         <Text className="text-muted-foreground font-medium mt-1 mb-6">
