@@ -26,7 +26,6 @@ export default function TabsLayout() {
         options={{
           title: "Inicio",
           tabBarLabel: "Inicio",
-          unmountOnBlur: true,
         }}
       />
       <Tabs.Screen
@@ -34,7 +33,6 @@ export default function TabsLayout() {
         options={{
           title: "Quests",
           tabBarLabel: "Quests",
-          unmountOnBlur: true,
         }}
       />
       <Tabs.Screen
@@ -42,7 +40,6 @@ export default function TabsLayout() {
         options={{
           title: "Wallet",
           tabBarLabel: "Wallet",
-          unmountOnBlur: true,
         }}
       />
       <Tabs.Screen
@@ -50,7 +47,6 @@ export default function TabsLayout() {
         options={{
           title: "Perfil",
           tabBarLabel: "Perfil",
-          unmountOnBlur: true,
         }}
       />
     </Tabs>

@@ -14,6 +14,7 @@ import {
   getThemeMarker,
   getXpForNextLevel,
 } from "../utils/profileMath";
+import { DEFAULT_PROFILE_AVATAR } from "../constants/avatarEmojis";
 
 interface ProfileHeaderProps {
   displayName?: string | null;
@@ -80,7 +81,7 @@ export function ProfileHeader({
           style={{ borderWidth: 4, borderColor: "rgba(217,30,30,0.3)" }}
           activeOpacity={0.8}
         >
-          <Text className="text-6xl">{avatarUrl || "👤"}</Text>
+          <Text className="text-6xl">{avatarUrl || DEFAULT_PROFILE_AVATAR}</Text>
         </TouchableOpacity>
 
         {/* Level Badge — plain View, className works fine here */}

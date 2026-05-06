@@ -22,6 +22,13 @@ export function useProfile() {
     staleTime: 1000 * 60 * 5,
   });
 
+  const monthlyMetricsQuery = useQuery({
+    queryKey: ["profile-monthly-metrics", user?.id],
+    queryFn: () => (user?.id ? ProfileService.getMonthlyMetrics(user.id) : null),
+    enabled: !!user?.id,
+    staleTime: 1000 * 60 * 5,
+  });
+
   const updateProfileMutation = useMutation({
     mutationFn: (updates: ProfileUpdate) => {
       if (!user?.id) throw new Error("No hay usuario autenticado");
@@ -36,8 +43,9 @@ export function useProfile() {
   return {
     profile: profileQuery.data,
     stats: statsQuery.data,
-    isLoading: profileQuery.isLoading || statsQuery.isLoading,
-    error: profileQuery.error || statsQuery.error,
+    monthlyMetrics: monthlyMetricsQuery.data,
+    isLoading: profileQuery.isLoading || statsQuery.isLoading || monthlyMetricsQuery.isLoading,
+    error: profileQuery.error || statsQuery.error || monthlyMetricsQuery.error,
     updateProfile: updateProfileMutation.mutateAsync,
     isUpdating: updateProfileMutation.isPending,
   };

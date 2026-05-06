@@ -8,12 +8,13 @@ import { useProfile } from "@/features/profile/hooks/useProfile";
 import { ProfileHeader } from "@/features/profile/components/ProfileHeader";
 import { StatsGrid } from "@/features/profile/components/StatsGrid";
 import { EmojiPicker } from "@/features/profile/components/EmojiPicker";
+import { MonthlyProgressCard } from "@/features/profile/components/MonthlyProgressCard";
 import { LogOut, Palette, User, Info, ChevronRight } from "lucide-react-native";
 import { useRouter } from "expo-router";
 
 export default function ProfileTab() {
   const { signOut } = useAuth();
-  const { profile, stats, isLoading, updateProfile } = useProfile();
+  const { profile, stats, monthlyMetrics, isLoading, updateProfile } = useProfile();
   const [emojiPickerOpen, setEmojiPickerOpen] = React.useState(false);
   const router = useRouter();
 
@@ -103,6 +104,28 @@ export default function ProfileTab() {
             />
           </View>
 
+          {/* Monthly Progress */}
+          {monthlyMetrics && (
+            <View style={{ marginTop: 24 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 16,
+                }}
+              >
+                <Info size={16} color="#d91e1e" />
+                <Text className="text-xl font-black text-foreground ml-2">
+                  Progreso de este mes
+                </Text>
+              </View>
+              <MonthlyProgressCard
+                completedThisMonth={monthlyMetrics.completedThisMonth}
+                completionPercentage={monthlyMetrics.completionPercentage}
+              />
+            </View>
+          )}
+
           {/* Settings & Management */}
           <View style={{ marginTop: 40 }}>
             <Text className="text-xl font-black text-foreground mb-4">
@@ -145,6 +168,25 @@ export default function ProfileTab() {
                   </Text>
                   <Text className="text-muted-foreground text-xs font-medium">
                     Elige tu representación
+                  </Text>
+                </View>
+                <ChevronRight size={18} color="#666" />
+              </Button>
+
+              <Button
+                variant="outline"
+                className="w-full justify-start rounded-3xl !h-16 border-border/50 bg-card/30"
+                onPress={() => router.push("/profile/edit")}
+              >
+                <View className="bg-purple-500/10 p-2.5 rounded-2xl mr-4">
+                  <User size={22} color="#8b5cf6" />
+                </View>
+                <View className="flex-1 items-start">
+                  <Text className="text-foreground font-bold text-base">
+                    Editar Nombre
+                  </Text>
+                  <Text className="text-muted-foreground text-xs font-medium">
+                    Actualizá tu identidad visible
                   </Text>
                 </View>
                 <ChevronRight size={18} color="#666" />

@@ -43,3 +43,6 @@ yarn-error.*
 
 # Playwright MCP temporary artifacts
 .playwright-mcp/
+
+# Agent skill registry artifacts
+.atl/

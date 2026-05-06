@@ -6,32 +6,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Text } from "@/components/ui/text";
+import { PROFILE_AVATAR_EMOJIS } from "@/features/profile/constants/avatarEmojis";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 import { Pressable, ScrollView, View } from "react-native";
-
-const EMOJIS = [
-  "🥷",
-  "🏴‍☠️",
-  "👤",
-  "🧛",
-  "🧟",
-  "🧜",
-  "🧚",
-  "🧞",
-  "🦸",
-  "🦹",
-  "🦁",
-  "🐯",
-  "🐲",
-  "🐺",
-  "🐼",
-  "🦊",
-  "🦒",
-  "🤖",
-  "👽",
-  "👾",
-];
 
 interface EmojiPickerProps {
   currentEmoji?: string | null;
@@ -54,7 +32,7 @@ export function EmojiPicker({
         </DialogHeader>
         <ScrollView className="max-h-72" showsVerticalScrollIndicator={false}>
           <View className="flex-row flex-wrap justify-center gap-3 py-4">
-            {EMOJIS.map((emoji) => (
+            {PROFILE_AVATAR_EMOJIS.map((emoji) => (
               <Pressable
                 key={emoji}
                 onPress={() => {
