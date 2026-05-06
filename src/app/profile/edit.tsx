@@ -15,6 +15,10 @@ import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import { useProfile } from "@/features/profile/hooks/useProfile";
 import { useToast } from "@/components/ui/toast";
+import {
+  isDisplayNameValid,
+  normalizeDisplayNameInput,
+} from "@/features/profile/utils/profileIdentity";
 
 export default function ProfileEditScreen() {
   const router = useRouter();
@@ -40,9 +44,9 @@ export default function ProfileEditScreen() {
   }, [profile?.display_name]);
 
   const handleSubmit = async () => {
-    const trimmed = displayName.trim();
+    const trimmed = normalizeDisplayNameInput(displayName);
 
-    if (!trimmed) {
+    if (!isDisplayNameValid(displayName)) {
       setError("El nombre no puede estar vacío.");
       toast.show("Nombre inválido", "Ingresá un nombre para poder guardar.", "error");
       return;

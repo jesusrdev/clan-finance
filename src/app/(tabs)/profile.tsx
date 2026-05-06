@@ -9,6 +9,7 @@ import { ProfileHeader } from "@/features/profile/components/ProfileHeader";
 import { StatsGrid } from "@/features/profile/components/StatsGrid";
 import { EmojiPicker } from "@/features/profile/components/EmojiPicker";
 import { MonthlyProgressCard } from "@/features/profile/components/MonthlyProgressCard";
+import { getMonthlyProgressViewModel } from "@/features/profile/utils/profileProgress";
 import { LogOut, Palette, User, Info, ChevronRight } from "lucide-react-native";
 import { useRouter } from "expo-router";
 
@@ -26,6 +27,7 @@ export default function ProfileTab() {
   } = useProfile();
   const [emojiPickerOpen, setEmojiPickerOpen] = React.useState(false);
   const router = useRouter();
+  const monthlyProgress = getMonthlyProgressViewModel(monthlyMetrics);
 
   if (isInitialLoading) {
     return (
@@ -124,7 +126,7 @@ export default function ProfileTab() {
           </View>
 
           {/* Monthly Progress */}
-          {monthlyMetrics && (
+          {monthlyProgress && (
             <View style={{ marginTop: 24 }}>
               <View
                 style={{
@@ -139,8 +141,8 @@ export default function ProfileTab() {
                 </Text>
               </View>
               <MonthlyProgressCard
-                completedThisMonth={monthlyMetrics.completedThisMonth}
-                completionPercentage={monthlyMetrics.completionPercentage}
+                completedThisMonth={monthlyProgress.completedThisMonth}
+                completionPercentage={monthlyProgress.completionPercentage}
               />
             </View>
           )}

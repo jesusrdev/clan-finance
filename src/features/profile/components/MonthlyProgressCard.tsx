@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Text } from "@/components/ui/text";
 import { Trophy } from "lucide-react-native";
+import { isMonthlyProgressZeroState } from "@/features/profile/utils/profileProgress";
 
 interface MonthlyProgressCardProps {
   completedThisMonth: number;
@@ -12,7 +13,7 @@ export function MonthlyProgressCard({
   completedThisMonth,
   completionPercentage,
 }: MonthlyProgressCardProps) {
-  const isZeroState = completedThisMonth === 0 && completionPercentage === 0;
+  const isZeroState = isMonthlyProgressZeroState(completedThisMonth, completionPercentage);
 
   return (
     <View className="bg-card p-5 rounded-3xl border border-border/50 shadow-sm">
