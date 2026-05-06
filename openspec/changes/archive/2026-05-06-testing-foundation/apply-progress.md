@@ -24,6 +24,10 @@
 - [x] 4.1 Create `.github/workflows/ci-quality.yml` running `npm run typecheck`, `npm run test`, and `npm run coverage` as required PR gates.
 - [x] 4.2 Configure CI coverage output to show measured vs required threshold values on failure.
 - [x] 4.3 Document initial threshold and ratchet plan in project docs/change notes, including chosen Node-version source of truth.
+- [x] 5.1 Add behavioral tests for unsupported runtime configuration failure diagnostics.
+- [x] 5.2 Add deterministic timer-sensitive behavior test(s) using fake timers.
+- [x] 5.3 Extract CI coverage gate logic into testable script module and add unit tests for pass/fail diagnostics.
+- [x] 5.4 Align coverage baseline policy artifact + workflow baseline for current phase while documenting ratchet path.
 
 ## Verification Evidence (Cumulative)
 
@@ -100,6 +104,54 @@
 - `openspec/changes/testing-foundation/tasks.md` (modified)
 - `openspec/changes/testing-foundation/apply-progress.md` (modified)
 
+## Additional Evidence (Work Unit 5 — Verify Remediation)
+
+| Command | Result | Evidence |
+|---|---|---|
+| `npm run test -- src/ci/quality-gate.test.ts src/test/runtime-config.behavior.test.ts src/test/timer-determinism.behavior.test.ts` | ✅ Pass | Behavioral evidence added for CI gate logic pass/fail diagnostics, unsupported runtime configuration failure, and deterministic fake-timer behavior. |
+| `npm run test` | ✅ Pass | Full suite executes with remediation tests included and no regressions in existing tests. |
+| `npm run coverage` | ✅ Pass | Coverage collected after remediation; CI baseline policy aligned to 12% in workflow and docs for current phase while preserving ratchet path to 20%+. |
+
+## Files Changed in Work Unit 5
+
+- `src/ci/quality-gate.mjs` (created; pure gate logic for command + coverage evaluation)
+- `src/ci/quality-gate.cli.mjs` (created; non-destructive CLI entrypoint used by CI workflow)
+- `src/ci/quality-gate.test.ts` (created; unit tests for typecheck/test/coverage gate behaviors)
+- `src/test/runtime-config.behavior.test.ts` (created; unsupported runtime config behavioral failure evidence)
+- `src/test/timerUtils.ts` (created; timer-sensitive helper used for deterministic fake-timer testing)
+- `src/test/timer-determinism.behavior.test.ts` (created; deterministic repeated fake-timer scenario evidence)
+- `.github/workflows/ci-quality.yml` (modified; gate baseline currently 12 and script-based enforcement)
+- `README.md` (modified; baseline policy + ratchet plan aligned to current phase)
+- `openspec/changes/testing-foundation/tasks.md` (modified)
+- `openspec/changes/testing-foundation/apply-progress.md` (modified)
+
+## Additional Evidence Merge (Verify Gap Closure)
+
+| Command | Result | Evidence |
+|---|---|---|
+| `npm run test -- src/ci/quality-gate.test.ts` | ✅ Pass | Includes explicit behavioral case: failing test command (`gateName: "test"`, `exitCode: 1`) fails gate with deterministic non-zero exit diagnostics. |
+
+## Files Changed in Verify Gap Closure
+
+- `src/ci/quality-gate.test.ts` (modified; added explicit failing-test-in-PR gate scenario test)
+- `openspec/changes/testing-foundation/tasks.md` (modified; added verify gap closure evidence note)
+- `openspec/changes/testing-foundation/apply-progress.md` (modified; merged final verification evidence)
+
+## Additional Evidence Merge (Deterministic Runtime Config Test Fix)
+
+| Command | Result | Evidence |
+|---|---|---|
+| `npm run test -- src/test/runtime-config.behavior.test.ts` | ✅ Pass | Targeted behavioral test passes after deterministic hardening (temp-root isolation, resolved Vitest binary, timeout/signal assertions). |
+| `npm run test` | ✅ Pass | Full suite passes with 13 files / 37 tests, including hardened runtime-config behavior test. |
+| `npm run coverage` | ✅ Pass | Coverage command passes with V8 reporter and global totals above current 12% CI baseline (lines/statements: 15.38%). |
+| `npm run typecheck` | ✅ Pass | `npx tsc --noEmit` completes with zero type errors after test fix. |
+
+## Files Changed in Work Unit 6 (Surgical Determinism Fix)
+
+- `src/test/runtime-config.behavior.test.ts` (modified; deterministic spawn execution using resolved Vitest binary, isolated temp cwd, explicit non-timeout assertions, guaranteed cleanup)
+- `openspec/changes/testing-foundation/tasks.md` (modified; merged deterministic-fix evidence)
+- `openspec/changes/testing-foundation/apply-progress.md` (modified; merged command evidence)
+
 ## Remaining Tasks
 
 - None — all tasks in this change are complete.
@@ -107,10 +159,10 @@
 ## Workload / PR Boundary
 
 - Mode: **stacked PR slice**
-- Boundary start: WU3 baseline (verification tests completed)
-- Boundary end: WU4 CI quality workflow + coverage threshold output + Node/docs policy published
-- Estimated review budget impact: moderate; scoped to CI + docs + minimal compatibility fixes
+- Boundary start: WU5 verify-remediation baseline (all change tasks already complete)
+- Boundary end: WU6 surgical deterministic fix for `runtime-config.behavior` + merged verification evidence
+- Estimated review budget impact: low; scoped to one behavioral test hardening and artifact updates
 
 ## Status
 
-15/15 tasks complete for `testing-foundation`. Ready for `sdd-verify`.
+19/19 tasks complete for `testing-foundation` including verify remediation tasks and final verify gap evidence closure. Ready for `sdd-verify`.

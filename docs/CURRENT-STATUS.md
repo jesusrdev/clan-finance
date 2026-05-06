@@ -7,7 +7,7 @@ _Última actualización: Mayo 2026_
 - **Módulo más avanzado:** `Profile` (con pulidos recientes de UX mobile).
 - **Base operativa:** autenticación y navegación principal.
 - **Pendiente/placeholder:** `Quests`, `Wallet` y `Clan`.
-- **SDD:** artefactos de `profile-phase2-completion` existen; verify en estado bloqueado por ausencia de tests automatizados de runtime.
+- **SDD:** `testing-foundation` archivado y consolidado en specs principales con verify PASS (11/11); `profile-phase2-completion` sigue bloqueado por falta de tests de runtime de ese cambio.
 
 ## Estado por módulo
 
@@ -39,3 +39,14 @@ Esto confirma comportamiento funcional base de sesión + perfil, pero **no** ree
 
 - Artefactos disponibles en `openspec/changes/profile-phase2-completion/` (proposal, spec, design, tasks, apply-progress, verify-report).
 - `verify-report.md` marca **FAIL** por 9/9 escenarios sin pruebas ejecutables (`UNTESTED`), aunque la implementación estructural/manual está completa.
+
+## Estado SDD: `testing-foundation` (archivado)
+
+- Archivado en `openspec/changes/archive/2026-05-06-testing-foundation/`.
+- Source of truth final en:
+  - `openspec/specs/test-foundation/spec.md`
+  - `openspec/specs/ci-quality-gates/spec.md`
+- Verify: **PASS WITH WARNINGS** (11/11 escenarios compliant; 19/19 tareas completas).
+- Warnings no bloqueantes:
+  - `react-test-renderer` deprecado en tests.
+  - warnings npm config (`node-linker`, `enable-pre-post-scripts`).

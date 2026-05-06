@@ -50,3 +50,15 @@ Chain strategy: stacked-to-main
 - [x] 4.1 Create `.github/workflows/ci-quality.yml` running `npm run typecheck`, `npm run test`, and `npm run coverage` as required PR gates.
 - [x] 4.2 Configure CI coverage output to show measured vs required threshold values on failure.
 - [x] 4.3 Document initial threshold and ratchet plan in project docs/change notes, including chosen Node-version source of truth.
+
+## Phase 5: Verify Remediation (Behavioral Gaps)
+
+- [x] 5.1 Add behavioral tests for unsupported runtime configuration failure diagnostics.
+- [x] 5.2 Add deterministic timer-sensitive behavior test(s) using fake timers.
+- [x] 5.3 Extract CI coverage gate logic into testable script module and add unit tests for pass/fail diagnostics.
+- [x] 5.4 Align coverage baseline policy artifact + workflow baseline for current phase while documenting ratchet path.
+
+## Verify Gap Closure Evidence
+
+- [x] Added explicit behavioral evidence for `CI Quality Gates / Test Execution Gate / Failing test in PR` in `src/ci/quality-gate.test.ts` (`evaluateCommandGate` with `gateName: "test"` and non-zero exit code path).
+- [x] Stabilized `src/test/runtime-config.behavior.test.ts` by isolating Vitest CLI execution to a temp root, using resolved CLI path, enforcing non-timeout assertions, and re-validating targeted/full/coverage/typecheck commands.

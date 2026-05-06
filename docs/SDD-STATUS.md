@@ -2,6 +2,20 @@
 
 _Última actualización: Mayo 2026_
 
+## `testing-foundation` (archivado y consolidado)
+
+- **Implementación en código:** ✅ completada.
+- **Archive:** ✅ `openspec/changes/archive/2026-05-06-testing-foundation/`.
+- **Specs finales (source of truth):**
+  - `openspec/specs/test-foundation/spec.md`
+  - `openspec/specs/ci-quality-gates/spec.md`
+- **Verify:** ✅ PASS WITH WARNINGS (11/11 escenarios compliant; 19/19 tareas completas).
+
+### Warnings no bloqueantes registrados
+
+- `react-test-renderer` deprecado en tests.
+- warnings de npm config: `node-linker`, `enable-pre-post-scripts`.
+
 ## `profile-phase2-completion`
 
 - **Implementación en código:** ✅ completada (perfil fase 2).

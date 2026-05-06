@@ -7,6 +7,7 @@
 Este documento mantiene el **roadmap objetivo**. El estado real implementado actualmente es:
 
 - ✅ **Profile**: módulo más desarrollado actualmente.
+- ✅ **Testing Foundation + CI Quality Gates**: establecidos y archivados vía `testing-foundation` (verify PASS WITH WARNINGS, 11/11 escenarios).
 - 🚧 **Quests / Wallet / Clan**: todavía en placeholder o pendiente de implementación funcional.
 
 Tomá esta guía como plan de ejecución, no como evidencia de completitud actual.

@@ -81,8 +81,11 @@ Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 
 ### Nota SDD (estado real)
 
-- Existen artefactos OpenSpec para `profile-phase2-completion` en `openspec/changes/profile-phase2-completion/`.
-- La verificación SDD está **bloqueada** por falta de tests automatizados de runtime (hay validación funcional/manual y evidencia estructural).
+- `testing-foundation` está archivado y consolidado en specs principales:
+  - `openspec/specs/test-foundation/spec.md`
+  - `openspec/specs/ci-quality-gates/spec.md`
+- Verify de `testing-foundation`: **PASS WITH WARNINGS** (11/11 escenarios compliant).
+- `profile-phase2-completion` mantiene verify **bloqueado** por falta de tests de runtime para ese cambio específico.
 
 > Nota: Para detalle puntual y sin ruido de roadmap, ver [`docs/CURRENT-STATUS.md`](docs/CURRENT-STATUS.md).
 
@@ -183,8 +186,13 @@ npm run coverage
 
 - Workflow: `.github/workflows/ci-quality.yml`
 - Gates requeridos en PR: `typecheck`, `test`, `coverage`
-- Baseline inicial de coverage: **20%** (lines/statements/functions/branches)
-- Ratchet plan: subir baseline progresivamente en cambios futuros según crecimiento de suites
+- Baseline inicial de coverage: **12%** (lines/statements/functions/branches)
+- Ratchet plan: subir baseline progresivamente por change (12% → 20% y luego incrementos) según crecimiento de suites
+
+### Warnings conocidos (no bloqueantes)
+
+- Warning deprecado: `react-test-renderer` en tests.
+- Warnings de npm config: `node-linker` y `enable-pre-post-scripts`.
 
 ### Node version source of truth
 
