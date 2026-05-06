@@ -14,10 +14,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import { useProfile } from "@/features/profile/hooks/useProfile";
+import { useToast } from "@/components/ui/toast";
 
 export default function ProfileEditScreen() {
   const router = useRouter();
   const { profile, updateProfile, isUpdating } = useProfile();
+  const toast = useToast();
   const { width } = useWindowDimensions();
   const isCompact = width < 380;
   const [displayName, setDisplayName] = React.useState(profile?.display_name ?? "");
@@ -42,18 +44,21 @@ export default function ProfileEditScreen() {
 
     if (!trimmed) {
       setError("El nombre no puede estar vacío.");
+      toast.show("Nombre inválido", "Ingresá un nombre para poder guardar.", "error");
       return;
     }
 
-      setError(null);
+    setError(null);
 
-      try {
-        await updateProfile({ display_name: trimmed });
-        handleBack();
-      } catch (e) {
-        console.error("Error al actualizar display_name:", e);
-        setError("No pudimos guardar tu nombre. Intentá nuevamente.");
-      }
+    try {
+      await updateProfile({ display_name: trimmed });
+      toast.show("Cambios guardados", "Tu nombre se actualizó correctamente.", "success");
+      handleBack();
+    } catch (e) {
+      console.error("Error al actualizar display_name:", e);
+      setError("No pudimos guardar tu nombre. Intentá nuevamente.");
+      toast.show("No se pudo guardar", "Revisá tu conexión e intentá de nuevo.", "error");
+    }
   };
 
   return (
