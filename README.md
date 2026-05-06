@@ -75,9 +75,14 @@ Ver [Guía de Inicio Completa](docs/INICIO.md) para más detalles.
 
 ## 📱 Estado Actual (resumen rápido)
 
-- ✅ **Profile** es hoy el módulo más desarrollado (perfil, stats visuales, avatar por emoji, selección/persistencia de skin, logout desde perfil).
+- ✅ **Profile (Fase 2 completada en código)**: edición de nombre visible, tarjeta de progreso mensual (misiones completadas + porcentaje) y avatar por emoji con normalización.
 - 🟡 **Auth** está operativo para flujo base de login/registro/logout.
 - 🚧 **Quests**, **Wallet** y **Clan** siguen en estado placeholder/pending (sin implementación funcional completa).
+
+### Nota SDD (estado real)
+
+- Existen artefactos OpenSpec para `profile-phase2-completion` en `openspec/changes/profile-phase2-completion/`.
+- La verificación SDD está **bloqueada** por falta de tests automatizados de runtime (hay validación funcional/manual y evidencia estructural).
 
 > Nota: Para detalle puntual y sin ruido de roadmap, ver [`docs/CURRENT-STATUS.md`](docs/CURRENT-STATUS.md).
 

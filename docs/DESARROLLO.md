@@ -68,16 +68,17 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 
 ### Setup Inicial
 
-- [ ] Crear estructura de carpetas del feature
-- [ ] Configurar tipos para Profile
+- [x] Crear estructura de carpetas del feature
+- [x] Configurar tipos para Profile
 
 ### Implementación
 
-- [ ] Crear/editar perfil de usuario
-  - [ ] Crear `ProfileScreen.tsx`
-  - [ ] Crear `EditProfileScreen.tsx`
-  - [ ] Formulario de edición (nombre, avatar)
-  - [ ] Upload de imagen (opcional)
+- [x] Crear/editar perfil de usuario (alcance actual)
+  - [x] Crear `ProfileScreen.tsx`
+  - [x] Crear `EditProfileScreen` vía ruta `src/app/profile/edit.tsx`
+  - [x] Formulario de edición de nombre visible
+  - [x] Avatar por emoji normalizado (sin upload de imagen)
+  - [ ] Upload de imagen (opcional, fuera de alcance actual)
 - [x] Implementar selección de tema (5 skins)
   - [x] Crear `ThemeSelectorScreen.tsx` (en `app/theme-selection.tsx`)
   - [x] Grid de temas con preview
@@ -87,19 +88,24 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
   - [ ] Mostrar XP actual
   - [ ] Barra de progreso a siguiente nivel
   - [ ] Cálculo de nivel basado en XP
-- [ ] Visualización de estadísticas
-  - [ ] Tareas completadas este mes
-  - [ ] Porcentaje de completado
-  - [ ] Balance actual
-  - [ ] Gráfica de progreso
+- [x] Visualización de estadísticas (perfil fase 2)
+  - [x] Tareas completadas este mes
+  - [x] Porcentaje de completado
+  - [x] Balance actual
+  - [x] Tarjeta de progreso mensual (`MonthlyProgressCard`)
 
 ### Testing
 
 - [ ] Crear perfil nuevo
-- [ ] Editar nombre y avatar
+- [x] Editar nombre y avatar emoji (normalización incluida)
 - [ ] Cambiar tema y verificar aplicación
 - [ ] Verificar cálculo de XP
-- [ ] Verificar estadísticas
+- [x] Verificar estadísticas de progreso mensual (manual)
+
+### Nota SDD de Fase 2
+
+- Cambio OpenSpec: `profile-phase2-completion` con artefactos completos en `openspec/changes/profile-phase2-completion/`.
+- Estado de verify: **bloqueado por falta de tests automatizados de runtime** (hay validación funcional/manual y evidencia estructural).
 
 ---
 

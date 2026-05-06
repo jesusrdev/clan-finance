@@ -6,6 +6,7 @@
 docs/
 ├── README.md                # Este archivo (índice)
 ├── CURRENT-STATUS.md        # Estado real actual + verificación manual reciente
+├── SDD-STATUS.md            # Estado SDD real (artefactos vs verify)
 ├── INICIO.md                # Instalación y configuración
 ├── DESARROLLO.md            # Roadmap con checkboxes por fase
 ├── CASOS-DE-USO.md          # 43 casos de uso atómicos
@@ -27,24 +28,25 @@ docs/
 
 1. **[README.md](../README.md)** - Visión general y guía rápida
 2. **[CURRENT-STATUS.md](CURRENT-STATUS.md)** - Estado real actual del producto
-3. **[INICIO.md](INICIO.md)** - Instalación paso a paso
+3. **[SDD-STATUS.md](SDD-STATUS.md)** - Estado real de cambios OpenSpec
+4. **[INICIO.md](INICIO.md)** - Instalación paso a paso
 
 ### Desarrollo
 
-4. **[DESARROLLO.md](DESARROLLO.md)** - Roadmap con checkboxes
-5. **[CASOS-DE-USO.md](CASOS-DE-USO.md)** - 43 casos de uso documentados
-6. **[LOGICA-DE-NEGOCIO.md](LOGICA-DE-NEGOCIO.md)** - Flujos y reglas
+5. **[DESARROLLO.md](DESARROLLO.md)** - Roadmap con checkboxes
+6. **[CASOS-DE-USO.md](CASOS-DE-USO.md)** - 43 casos de uso documentados
+7. **[LOGICA-DE-NEGOCIO.md](LOGICA-DE-NEGOCIO.md)** - Flujos y reglas
 
 ### Arquitectura
 
-7. **[architecture/ARQUITECTURA.md](architecture/ARQUITECTURA.md)** - Principios y capas
-8. **[architecture/DIAGRAMAS.md](architecture/DIAGRAMAS.md)** - Diagramas visuales
-9. **[architecture/FLUJOS.md](architecture/FLUJOS.md)** - Diagramas de secuencia
+8. **[architecture/ARQUITECTURA.md](architecture/ARQUITECTURA.md)** - Principios y capas
+9. **[architecture/DIAGRAMAS.md](architecture/DIAGRAMAS.md)** - Diagramas visuales
+10. **[architecture/FLUJOS.md](architecture/FLUJOS.md)** - Diagramas de secuencia
 
 ### Base de Datos
 
-10. **[database/supabase-schema.sql](database/supabase-schema.sql)** - Script SQL
-11. **[database/SEGURIDAD-RLS.md](database/SEGURIDAD-RLS.md)** - Políticas RLS
+11. **[database/supabase-schema.sql](database/supabase-schema.sql)** - Script SQL
+12. **[database/SEGURIDAD-RLS.md](database/SEGURIDAD-RLS.md)** - Políticas RLS
 
 ## 🎯 Documentos por Rol
 
@@ -206,6 +208,7 @@ docs/
 | Necesito...           | Ir a...                                                      |
 | --------------------- | ------------------------------------------------------------ |
 | Ver el estado real actual | [CURRENT-STATUS.md](CURRENT-STATUS.md)                  |
+| Ver estado SDD real   | [SDD-STATUS.md](SDD-STATUS.md)                               |
 | Instalar el proyecto  | [INICIO.md](INICIO.md)                                       |
 | Ver casos de uso      | [CASOS-DE-USO.md](CASOS-DE-USO.md)                           |
 | Roadmap de desarrollo | [DESARROLLO.md](DESARROLLO.md)                               |
