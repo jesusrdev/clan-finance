@@ -1,0 +1,85 @@
+name: Bug Report
+description: Reportar un error reproducible
+title: "fix(scope): breve descripcion"
+labels:
+  - bug
+  - status:needs-review
+body:
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight Checks
+      options:
+        - label: Busque issues existentes y no es duplicado
+          required: true
+        - label: Entiendo que esta issue necesita status:approved antes de abrir PR
+          required: true
+
+  - type: textarea
+    id: bug
+    attributes:
+      label: Descripcion del bug
+      placeholder: "Que esta pasando y por que es incorrecto"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      placeholder: |
+        1. Ir a...
+        2. Hacer...
+        3. Ver error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento actual
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Sistema operativo
+      options:
+        - macOS
+        - Linux
+        - Windows
+        - WSL
+        - Otro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: shell
+    attributes:
+      label: Shell
+      options:
+        - zsh
+        - bash
+        - fish
+        - otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs relevantes (opcional)
+      render: shell
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto adicional (opcional)

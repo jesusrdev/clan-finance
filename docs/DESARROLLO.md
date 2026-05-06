@@ -12,6 +12,23 @@ Este documento mantiene el **roadmap objetivo**. El estado real implementado act
 
 Tomá esta guía como plan de ejecución, no como evidencia de completitud actual.
 
+## 🔗 Trazabilidad Roadmap → GitHub Issues
+
+Para ejecución diaria usar GitHub como fuente operativa (issue -> branch -> PR).
+
+- Fase 1 (Auth): #1
+- Fase 2 (Profile): #2
+- Fase 3 (Clan): #3 (subissues: #11, #12, #13)
+- Fase 4 (Quests): #4 (subissues: #14, #15, #16, #17)
+- Fase 5 (Wallet): #5 (subissues: #18, #19, #20, #21)
+- Fase 6 (Notifications): #6
+- Fase 7 (Pulido): #7
+- Release checklist: #8
+- Soporte web dashboard: #9
+- Validaciones críticas app: #10 (subissues: #22, #23, #24, #25, #26)
+
+Issue de gobernanza GitHub (templates + policy): #29
+
 ## 📋 Orden de Implementación Recomendado
 
 Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada item como completado a medida que avanzas.

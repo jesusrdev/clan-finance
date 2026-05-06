@@ -1,0 +1,60 @@
+name: Feature Request
+description: Proponer una mejora o funcionalidad
+title: "feat(scope): breve descripcion"
+labels:
+  - enhancement
+  - status:needs-review
+body:
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight Checks
+      options:
+        - label: Busque issues existentes y no es duplicado
+          required: true
+        - label: Entiendo que esta issue necesita status:approved antes de abrir PR
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema a resolver
+      description: Que dolor actual existe y para quien.
+      placeholder: "Hoy no podemos..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solucion propuesta
+      description: Como deberia verse desde la perspectiva de usuario/producto.
+      placeholder: "Propongo implementar..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area afectada
+      options:
+        - Frontend
+        - Backend
+        - Mobile
+        - CI/Workflows
+        - Documentacion
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas (opcional)
+      placeholder: "Tambien se evaluo..."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto adicional (opcional)
+      placeholder: "Links, mockups, referencias..."
