@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Pressable, Platform } from "react-native";
+import { View, Pressable, Platform, useWindowDimensions } from "react-native";
 import { Text } from "@/components/ui/text";
 import Animated, {
   useAnimatedStyle,
@@ -9,7 +9,7 @@ import Animated, {
   runOnJS,
 } from "react-native-reanimated";
 import { useUniwind } from "uniwind";
-import { THEME_METADATA, THEME } from "@/lib/theme";
+import { THEME } from "@/lib/theme";
 
 type ToastType = "success" | "error" | "info";
 
@@ -37,7 +37,8 @@ export function useToast() {
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = React.useState<ToastMessage[]>([]);
   const { theme } = useUniwind();
-  const metadata = THEME_METADATA[theme as keyof typeof THEME_METADATA];
+  const { width } = useWindowDimensions();
+  const horizontalInset = width < 390 ? 14 : 18;
 
   const show = React.useCallback(
     (title: string, message: string, type: ToastType = "info") => {
@@ -58,8 +59,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         style={{
           position: "absolute",
           top: Platform.OS === "web" ? 20 : 60,
-          left: 0,
-          right: 0,
+          left: horizontalInset,
+          right: horizontalInset,
           alignItems: "center",
           zIndex: 9999,
           pointerEvents: "box-none",
@@ -71,6 +72,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             toast={toast}
             index={index}
             theme={theme as keyof typeof THEME}
+            width={width}
             onDismiss={() =>
               setToasts((prev) => prev.filter((t) => t.id !== toast.id))
             }
@@ -85,11 +87,13 @@ function ToastItem({
   toast,
   index,
   theme,
+  width,
   onDismiss,
 }: {
   toast: ToastMessage;
   index: number;
   theme: keyof typeof THEME;
+  width: number;
   onDismiss: () => void;
 }) {
   const translateY = useSharedValue(-100);
@@ -133,10 +137,9 @@ function ToastItem({
       style={[
         animatedStyle,
         {
-          marginHorizontal: 16,
           marginBottom: 8,
-          maxWidth: 400,
-          width: "100%",
+          maxWidth: 420,
+          width: width < 390 ? "100%" : "96%",
         },
       ]}
     >

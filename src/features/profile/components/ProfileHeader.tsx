@@ -31,6 +31,7 @@ export function ProfileHeader({
   selectedTheme = "light",
   onAvatarPress,
 }: ProfileHeaderProps) {
+  const MARKER_SIZE = 24;
   const level = getLevel(xp);
   const progress = getLevelProgress(xp);
   const rank = getRankTitle(selectedTheme || "light", level);
@@ -56,7 +57,7 @@ export function ProfileHeader({
 
   const markerStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: animatedProgress.value * trackWidth - 12 },
+      { translateX: animatedProgress.value * trackWidth - MARKER_SIZE / 2 },
       {
         scale: interpolate(
           animatedProgress.value,
@@ -155,14 +156,19 @@ export function ProfileHeader({
           {/* Animated marker — style only (dynamic translateX) */}
           {trackWidth > 0 && (
             <Animated.View
-              className="absolute top-0 items-center justify-center"
-              style={[{ top: -10, left: 0 }, markerStyle]}
+              className="absolute left-0 top-0 bottom-0 items-center justify-center"
+              style={markerStyle}
             >
               <View
-                className="rounded-full p-1 bg-background"
-                style={{ borderWidth: 1, borderColor: "rgba(217,30,30,0.4)" }}
+                className="rounded-full bg-background items-center justify-center"
+                style={{
+                  width: MARKER_SIZE,
+                  height: MARKER_SIZE,
+                  borderWidth: 1,
+                  borderColor: "rgba(217,30,30,0.4)",
+                }}
               >
-                <Text className="text-base">{marker}</Text>
+                <Text className="text-sm">{marker}</Text>
               </View>
             </Animated.View>
           )}

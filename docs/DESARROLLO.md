@@ -7,6 +7,7 @@
 Este documento mantiene el **roadmap objetivo**. El estado real implementado actualmente es:
 
 - ✅ **Profile**: módulo más desarrollado actualmente.
+- ✅ **Testing Foundation + CI Quality Gates**: establecidos y archivados vía `testing-foundation` (verify PASS WITH WARNINGS, 11/11 escenarios).
 - 🚧 **Quests / Wallet / Clan**: todavía en placeholder o pendiente de implementación funcional.
 
 Tomá esta guía como plan de ejecución, no como evidencia de completitud actual.
@@ -77,6 +78,8 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
   - [x] Crear `ProfileScreen.tsx`
   - [x] Crear `EditProfileScreen` vía ruta `src/app/profile/edit.tsx`
   - [x] Formulario de edición de nombre visible
+  - [x] Feedback de guardado/error con toast en edición de nombre
+  - [x] Navegación explícita de retorno en edición (barra superior + fallback seguro)
   - [x] Avatar por emoji normalizado (sin upload de imagen)
   - [ ] Upload de imagen (opcional, fuera de alcance actual)
 - [x] Implementar selección de tema (5 skins)
@@ -93,6 +96,9 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
   - [x] Porcentaje de completado
   - [x] Balance actual
   - [x] Tarjeta de progreso mensual (`MonthlyProgressCard`)
+  - [x] Layout responsive para "Aventura actual" en pantallas pequeñas
+  - [x] Pull-to-refresh para refrescar datos de perfil manualmente
+  - [x] Flujo de estados más robusto: loading inicial -> error duro -> contenido
 
 ### Testing
 

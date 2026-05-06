@@ -53,6 +53,41 @@ Standard (strict_tdd: false)
 
 - None.
 
+## Runtime Automated Test Coverage (Verify Gap Closure)
+
+### Added/updated test artifacts
+
+- `src/app/profile/edit.behavior.test.ts`
+  - Cubre escenario spec **identity success** (input válido, trim correcto).
+  - Cubre escenario spec **identity empty reject** (input vacío/whitespace inválido).
+- `src/app/(tabs)/profile.behavior.test.ts`
+  - Cubre escenario spec **progress UI renders when metrics are available**.
+  - Cubre escenario spec **progress UI remains visible in zero state**.
+- `src/features/profile/components/MonthlyProgressCard.behavior.test.ts`
+  - Cubre semántica de zero-state del componente de progreso mensual.
+- `src/features/profile/utils/profileAcceptanceGate.behavior.test.ts`
+  - Cubre escenario spec **acceptance gate passes/fails** con criterios explícitos.
+
+### Supporting runtime utilities (minimal refactor for testability)
+
+- `src/features/profile/utils/profileIdentity.ts`
+  - Extrae normalización y validación de `display_name` para pruebas runtime determinísticas.
+- `src/features/profile/utils/profileProgress.ts`
+  - Extrae visibilidad/modelado de progreso mensual y regla de zero-state.
+- `src/features/profile/utils/profileAcceptanceGate.ts`
+  - Define gate verificable de aceptación (`displayNamePersistence`, `monthlyMetricsShown`, `progressVisible`, `docsAligned`).
+
+### Docs-alignment verification criterion (sin tests textuales)
+
+- Se elimina dependencia de tests de texto documental.
+- **Criterio verificable correcto**: `docsAligned` se valida por coherencia entre artifacts SDD (`spec.md`, `tasks.md`, `apply-progress.md`, `verify-report.md`) durante verify, no por assertions de strings sobre documentación narrativa.
+
+### Command evidence
+
+- `npm run test` → ✅ 27 passed / 0 failed
+- `npm run typecheck` → ✅ passed
+- `npm run coverage` → ✅ passed (global 13.72%, sin threshold configurado)
+
 ## Continuation: Avatar Normalization Bugfix (Soft Migration)
 
 - [x] Added profile-domain avatar normalization utility that preserves supported emoji and falls back to `👤` for null/empty/url/non-emoji values.
@@ -71,4 +106,4 @@ Standard (strict_tdd: false)
 - Delivery strategy: ask-on-risk
 - Forecast risk: Medium
 - Current work unit: Metrics backend + hook + progress UI + edit route (single apply batch)
-- Estimated review impact: within forecasted range, manual verification still pending
+- Estimated review impact: within forecasted range; runtime automated coverage added for verify closure

@@ -6,7 +6,7 @@
 docs/
 ├── README.md                # Este archivo (índice)
 ├── CURRENT-STATUS.md        # Estado real actual + verificación manual reciente
-├── SDD-STATUS.md            # Estado SDD real (artefactos vs verify)
+├── SDD-STATUS.md            # Estado SDD real (incluye testing-foundation archivado)
 ├── INICIO.md                # Instalación y configuración
 ├── DESARROLLO.md            # Roadmap con checkboxes por fase
 ├── CASOS-DE-USO.md          # 43 casos de uso atómicos
@@ -28,7 +28,7 @@ docs/
 
 1. **[README.md](../README.md)** - Visión general y guía rápida
 2. **[CURRENT-STATUS.md](CURRENT-STATUS.md)** - Estado real actual del producto
-3. **[SDD-STATUS.md](SDD-STATUS.md)** - Estado real de cambios OpenSpec
+3. **[SDD-STATUS.md](SDD-STATUS.md)** - Estado real de cambios OpenSpec (incluye CI quality gates y test foundation)
 4. **[INICIO.md](INICIO.md)** - Instalación paso a paso
 
 ### Desarrollo
