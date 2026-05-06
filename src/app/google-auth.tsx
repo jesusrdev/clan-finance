@@ -49,7 +49,9 @@ export default function GoogleAuthCallback() {
 
           // Pequeña pausa para que el usuario vea el toast
           await new Promise((resolve) => setTimeout(resolve, 500));
-          router.replace("/(tabs)");
+
+          // Dejar que el gate central (_layout) resuelva onboarding vs tabs.
+          router.replace("/");
         } else {
           console.log(
             "No session found after OAuth. Params:",
