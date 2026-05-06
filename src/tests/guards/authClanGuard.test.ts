@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveAuthClanRedirect, shouldHoldNavigation } from "./authClanGuard";
+import { resolveAuthClanRedirect, shouldHoldNavigation } from "@/app/guards/authClanGuard";
 
 describe("resolveAuthClanRedirect", () => {
   const base = {
