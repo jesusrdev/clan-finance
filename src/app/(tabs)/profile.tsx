@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView, ActivityIndicator } from "react-native";
+import { View, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
@@ -14,11 +14,20 @@ import { useRouter } from "expo-router";
 
 export default function ProfileTab() {
   const { signOut } = useAuth();
-  const { profile, stats, monthlyMetrics, isLoading, updateProfile } = useProfile();
+  const {
+    profile,
+    stats,
+    monthlyMetrics,
+    isInitialLoading,
+    isRefreshing,
+    error,
+    refreshProfile,
+    updateProfile,
+  } = useProfile();
   const [emojiPickerOpen, setEmojiPickerOpen] = React.useState(false);
   const router = useRouter();
 
-  if (isLoading && !profile) {
+  if (isInitialLoading) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
         <ActivityIndicator size="large" color="#d91e1e" />
@@ -29,7 +38,7 @@ export default function ProfileTab() {
     );
   }
 
-  if (!profile && !isLoading) {
+  if (!profile && error) {
     return (
       <View className="flex-1 bg-background items-center justify-center px-6">
         <View className="bg-destructive/10 p-6 rounded-3xl border border-destructive/20 items-center">
@@ -41,6 +50,9 @@ export default function ProfileTab() {
             Ha ocurrido un problema al cargar los datos de tu cuenta. Por favor,
             intenta cerrar sesión y volver a entrar.
           </Text>
+          <Button variant="outline" className="w-full mb-3" onPress={refreshProfile}>
+            <Text>Reintentar</Text>
+          </Button>
           <Button variant="outline" className="w-full" onPress={signOut}>
             <Text>Cerrar Sesión</Text>
           </Button>
@@ -63,6 +75,13 @@ export default function ProfileTab() {
         className="flex-1"
         contentContainerStyle={{ paddingBottom: 80 }}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={refreshProfile}
+            tintColor="#d91e1e"
+          />
+        }
       >
         {/* Centered container — max-width for desktop */}
         <View
