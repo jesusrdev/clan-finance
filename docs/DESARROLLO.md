@@ -186,6 +186,17 @@ Esta guía presenta las tareas de desarrollo en el orden sugerido. Marca cada it
 
 ## Fase 4: Quests (`src/features/quests/`)
 
+### Regla de idempotencia por frecuencia (Issue 23)
+
+- La completitud de tareas `daily`, `weekly` y `monthly` se valida contra ventanas **UTC** explícitas:
+  - `daily`: `[00:00:00 UTC del día, 00:00:00 UTC del día siguiente)`
+  - `weekly`: `[lunes ISO 00:00:00 UTC, lunes siguiente 00:00:00 UTC)`
+  - `monthly`: `[día 1 00:00:00 UTC, día 1 del mes siguiente 00:00:00 UTC)`
+- Si ya existe `task_logs` para `user_id + task_id` en la ventana activa, el service devuelve `QuestDomainError` con código `TASK_ALREADY_COMPLETED_IN_WINDOW`.
+- Contrato UX: ante ese código, la UI muestra **"Ya completaste esta tarea en este período."** y evita copy genérico.
+- Mitigación de doble submit: el botón de completar permanece deshabilitado mientras la request está in-flight.
+- Limitación conocida: el enfoque actual cliente (pre-check + insert) **no es atómico**; puede haber carrera en alta concurrencia. Evolución futura: RPC/constraint atómico en DB.
+
 ### Setup Inicial
 
 - [ ] Crear estructura de carpetas del feature
